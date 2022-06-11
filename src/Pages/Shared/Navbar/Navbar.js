@@ -11,9 +11,10 @@ const Navbar = () => {
 
         <li><Link to="/blog"><i class="fa-solid fa-person-chalkboard"></i>INTRO</Link></li>
         <li><Link to="/blog"><i class="fa-solid fa-address-card"></i>ABOUT</Link></li>
-        <li><Link to="/portfolio"><i class="fa-brands fa-servicestack"></i>SERVICE </Link></li>
-        <li><Link to="/portfolio"><i class="fa-solid fa-square-envelope"></i>CONTRACT </Link></li>
+        <li><Link to="/portfolio"><i class="fa-brands fa-servicestack"></i>Portfolio </Link></li>
         <li><Link to="/portfolio"><i class="fa-solid fa-file-code"></i>Skills </Link></li>
+        <li><Link to="/portfolio"><i class="fa-solid fa-square-envelope"></i>CONTRACT </Link></li>
+
     </>
     return (
         <div class="navbar bg-base-100">
