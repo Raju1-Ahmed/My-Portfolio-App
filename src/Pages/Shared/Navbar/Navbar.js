@@ -1,5 +1,5 @@
-import {  faGithub, faIntercom, faLinkedin, faMagento, faPinterest, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faTrainTram } from '@fortawesome/free-solid-svg-icons';
+import {  faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link } from 'react-router-dom';
