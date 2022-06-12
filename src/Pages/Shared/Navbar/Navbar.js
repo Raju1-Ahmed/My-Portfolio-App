@@ -12,11 +12,11 @@ const Navbar = () => {
         <li> <a href="#about"><i class="fa-solid fa-address-card"></i>ABOUT</a></li>
         <li> <a href="#portfolio"><i class="fa-brands fa-servicestack"></i>Portfolio </a></li>
         <li> <a href="#idname"><i class="fa-solid fa-file-code"></i> Skills</a></li>
-        <li><Link to="/portfolio"><i class="fa-solid fa-square-envelope"></i>CONTRACT </Link></li>
+        <li> <a href="#contract"><i class="fa-solid fa-square-envelope"></i>  CONTRACT</a></li>
 
     </>
     return (
-        <div class="navbar bg-base-100">
+        <div class="navbar  mt-0 bg-base-100">
             <div class="navbar-start">
                 <div class="dropdown">
                     <label tabindex="0" class="btn btn-ghost lg:hidden">
@@ -26,7 +26,7 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <a class="btn btn-ghost normal-case text-xl">
+                <a href='#home' class="btn btn-ghost normal-case text-xl">
                     <img className='w-10' src={logo} alt="" />
                     <p>obiusSani</p>
                 </a>

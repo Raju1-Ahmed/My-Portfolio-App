@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clothingWerehouse from '../../asset/portfulioImg/clothingWerehouse.png'
 import TeslaReview from '../../asset/portfulioImg/tesla-review.png'
 import homeshop from '../../asset/portfulioImg/Home-shop.png'
+
 const Portfolio = () => {
     return (
         <div>
