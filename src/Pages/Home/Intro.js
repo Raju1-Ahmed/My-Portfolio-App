@@ -4,7 +4,10 @@ import logo from '../../asset/logo/raju.png'
 
 const Intro = () => {
     return (
-        <div class="flex bg-base-100  mt-28 flex-col w-full lg:flex-row">
+       <div>
+            <h4 className='text-4xl font-bold text-cyan-900 text-center my-12'>Introduction for my self...!</h4>
+
+         <div id='intro' class="flex bg-base-100  mt-10 flex-col w-full lg:flex-row">
         <div class="grid flex-grow  lg:w-full card place-items-center lg:place-items-end">
         <div class="avatar">
                 <div class="w-48 mr-5 mb-5 rounded-full ring ring-success ring-offset-base-100 ring-offset-2">
@@ -46,6 +49,7 @@ const Intro = () => {
             </div>
         </div>
     </div>
+       </div>
     );
 };
 

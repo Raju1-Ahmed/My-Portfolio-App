@@ -8,11 +8,10 @@ import logo from '../../../asset/logo/raju.png'
 const Navbar = () => {
     const menuItems = <>
     
-
-        <li><Link to="/blog"><i class="fa-solid fa-person-chalkboard"></i>INTRO</Link></li>
-        <li><Link to="/blog"><i class="fa-solid fa-address-card"></i>ABOUT</Link></li>
-        <li><Link to="/portfolio"><i class="fa-brands fa-servicestack"></i>Portfolio </Link></li>
-        <li><Link to="/portfolio"><i class="fa-solid fa-file-code"></i>Skills </Link></li>
+        <li> <a href="#intro"><i class="fa-solid fa-person-chalkboard"></i> INTRO</a></li>
+        <li> <a href="#about"><i class="fa-solid fa-address-card"></i>ABOUT</a></li>
+        <li> <a href="#portfolio"><i class="fa-brands fa-servicestack"></i>Portfolio </a></li>
+        <li> <a href="#idname"><i class="fa-solid fa-file-code"></i> Skills</a></li>
         <li><Link to="/portfolio"><i class="fa-solid fa-square-envelope"></i>CONTRACT </Link></li>
 
     </>

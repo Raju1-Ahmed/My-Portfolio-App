@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const About = () => {
     return (
-       <div className='mt-32'>
+       <div id='about' className='mt-32'>
                     <h1 class="place-items-center  text-4xl font-bold text-cyan-900">Explain Here About Me..!</h1>
 
          <div class="flex bg-base-100 flex-col  w-full lg:flex-row">
