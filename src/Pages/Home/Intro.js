@@ -42,7 +42,7 @@ const Intro = () => {
                         />
                     </span>
                 </h2>
-                <p class="py-6 text-left">I have a only 6.month of experience in web development. I will make your own website in your budget. My packages price are very reliable, if you think that my packages price are highly in your budget you can order with custom price</p>
+                <p class="py-6 text-left">Graduate of computer science with experience working across the full-stack of web development.I have built 30+ projects  i am looking for a platfrom where I can grow and continue to learn from other experienced team members</p>
                 <button class="btn btn-xs sm:btn-sm md:btn-md btn-outline btn-success lg:btn-lg">Download CV</button>
                 <button></button>
                 <a  class="btn ml-7 btn-outline btn-success btn-xs sm:btn-sm md:btn-md lg:btn-lg" href="#contract">Contract</a>

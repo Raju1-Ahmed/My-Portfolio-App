@@ -39,7 +39,7 @@ const Navbar = () => {
             <div class="navbar-end justify-center">
                 {/* <a  href=""><FontAwesomeIcon icon={faTwitter} className='w-10 link link-accent'></FontAwesomeIcon></a> */}
             <span>
-            <a  className='w-10 link link-accent'  href="https://github.com/Raju1-Ahmed"  target="_blank"><FontAwesomeIcon icon={faGithub}></FontAwesomeIcon></a>
+            <a  className='w-10 link link-accent'  href="https://github.com/Raju1-Ahmed"  target="_blank"><FontAwesomeIcon icon={faGithub}></FontAwesomeIcon> </a>
 
             </span>
                 {/* <a  href=""><FontAwesomeIcon icon={faLinkedin} className='w-10 link link-accent'></FontAwesomeIcon></a> */}

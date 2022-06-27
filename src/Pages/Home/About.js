@@ -14,7 +14,7 @@ const About = () => {
                         <h1 className='text-3xl  link-accent font-bold'>
                             <i class="fa-solid fa-house-circle-exclamation"></i>
                         </h1>
-                        <h1 class="text-3xl  text-cyan-900">Box Office News!</h1>
+                        <h1 class="text-3xl  text-cyan-900">HOME</h1>
                         <p class="py-6 font-bold leading-loose   text-start">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </span>
                 </div>
