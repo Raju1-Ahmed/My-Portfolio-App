@@ -44,7 +44,7 @@ const Intro = () => {
                 </h2>
                 <p class="py-6 text-left">Graduate of computer science with experience working across the full-stack of web development.I have built 30+ projects  i am looking for a platfrom where I can grow and continue to learn from other experienced team members</p>
                 <button class="btn btn-xs sm:btn-sm md:btn-md btn-outline btn-success lg:btn-lg"> 
-                <a href="https://drive.google.com/file/d/1W3SVMXAfSRNnI67bxoVShm3dJM_svlGO/view?usp=sharing" target="blank">Download CV</a>
+                <a href="https://drive.google.com/file/d/1vy3mQmMXStEnb9bhkIVk-Tn67cW9vzsd/view?usp=sharing" target="blank">Download CV</a>
                  </button>
                 <button></button>
                 <a  class="btn ml-7 btn-outline btn-success btn-xs sm:btn-sm md:btn-md lg:btn-lg" href="#contract">Contract</a>
