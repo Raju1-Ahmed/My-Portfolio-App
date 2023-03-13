@@ -1,51 +1,117 @@
-import {  faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faUniversity } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../asset/logo/raju.png'
+import '../../Home/style.css'
 
 const Navbar = () => {
-    const menuItems = <>
-    
-        <li> <a href="#intro"><i class="fa-solid fa-person-chalkboard"></i> INTRO</a></li>
-        <li> <a href="#about"><i class="fa-solid fa-address-card"></i>ABOUT</a></li>
-        <li> <a href="#portfolio"><i class="fa-brands fa-servicestack"></i>Portfolio </a></li>
-        <li> <a href="#idname"><i class="fa-solid fa-file-code"></i> Skills</a></li>
-        <li> <a href="#contract"><i class="fa-solid fa-square-envelope"></i>  CONTRACT</a></li>
+  const options = [
+    { value: "home", label: "Home", to: "/home", icon: "fas fa-home" },
+    { value: "about", label: "hireMe", to: "/hireMe", icon: "fas fa-info-circle" },
+    { value: "contact", label: "Contact", to: "/contact", icon: "fas fa-envelope" },
+  ];
 
-    </>
-    return (
-        <div class="navbar  mt-0 bg-base-100">
-            <div class="navbar-start">
-                <div class="dropdown">
-                    <label tabindex="0" class="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                    </label>
-                    <ul tabindex="0" class="menu  menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                        {menuItems}
-                    </ul>
-                </div>
-                <a href='#home' class="btn btn-ghost normal-case text-xl">
-                    <img className='w-10' src={logo} alt="" />
-                    <p>obiusSani</p>
-                </a>
-            </div>
-            <div class="navbar-center hidden lg:flex">
-                <ul class="menu menu-horizontal  p-0">
-                   {menuItems}
-                </ul>
-            </div>
-            <div class="navbar-end justify-center">
-                {/* <a  href=""><FontAwesomeIcon icon={faTwitter} className='w-10 link link-accent'></FontAwesomeIcon></a> */}
-            <span>
-            <a  className='w-10 link link-accent'  href="https://github.com/Raju1-Ahmed"  target="_blank"><FontAwesomeIcon icon={faGithub}></FontAwesomeIcon> </a>
+  //  dropdown menu js code  start here  
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(options[0]);
 
-            </span>
-                {/* <a  href=""><FontAwesomeIcon icon={faLinkedin} className='w-10 link link-accent'></FontAwesomeIcon></a> */}
-            </div>
-        </div>
-    );
+  function toggleDropdown() {
+    setIsOpen(!isOpen);
+  }
+
+  function handleOptionClick(option) {
+    setSelectedOption(option);
+    setIsOpen(false);
+  }
+
+
+  var prevScrollpos = window.pageYOffset;
+  window.onscroll = function () {
+    var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+      document.getElementById("navbar").style.top = "0";
+    } else {
+      document.getElementById("navbar").style.top = "-50px";
+    }
+    prevScrollpos = currentScrollPos;
+  }
+
+  const [theme, setTheme] = useState(null);
+  console.log(theme);
+  useEffect(() => {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme('dark');
+    }
+    else {
+      setTheme('light');
+    }
+  }, [])
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+
+  const handleThemeSwitch = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
+  return (
+    <div id="navbar">
+
+      <nav className=''>
+        <ul>
+          {/* icon  */}
+          <div className='navStart'>
+            <a href='#home' class=" normal-case text-xl">
+              <img className='xl:w-8 lg:w-8 w-7 md:w-10 sm:w-7' src={logo} alt="" />
+            </a>
+          </div>
+          {/* main button  */}
+          <div className="navCenter">
+            <li> <a className='text-Bcolor font-bold' href="#intro"><i class="fa-solid fa-person-chalkboard"></i>Intro</a></li>
+            <li> <a className='text-Bcolor font-bold' href="#about"><i class="fa-solid fa-address-card"></i>ABOUT</a></li>
+            <li> <a className='text-Bcolor font-bold' href="#portfolio"><i class="fa-brands fa-servicestack"></i>PORTFOLIO</a></li>
+            <li> <a className='text-Bcolor font-bold' href="#idname"><i class="fa-solid fa-file-code"></i> Skills</a></li>
+            <li> <a className='text-Bcolor font-bold' href="#contract"><i class="fa-solid fa-square-envelope"></i>  CONTRACT</a></li>
+          </div>
+
+          {/* =========== dropDown Menu html code start here ============== */}
+          <div className="dropdown">
+      <button className="dropdown-toggle" onClick={toggleDropdown}>
+        <i className={selectedOption.icon}></i> {selectedOption.label}{" "}
+        <i
+          className={
+            isOpen ? "fas fa-chevron-up" : "fas fa-chevron-down"
+          }
+        ></i>
+      </button>
+      <ul className={isOpen ? "dropdown-menu show" : "dropdown-menu"}>
+        {options.map((option) => (
+          <li key={option.value}>
+            <Link
+              to={option.to}
+              onClick={() => handleOptionClick(option)}
+            >
+              <i className={option.icon}></i> {option.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+          <div className="navEnd">
+            <a className='w-10 link link-accent' href="https://github.com/Raju1-Ahmed" target="_blank"><FontAwesomeIcon icon={faGithub}></FontAwesomeIcon> </a>
+            <img onClick={handleThemeSwitch} src="https://img.icons8.com/external-others-amoghdesign/24/000000/external-mode-multimedia-flat-30px-others-amoghdesign.png" />
+          </div>
+        </ul>
+      </nav>
+    </div>
+  );
 };
 
 export default Navbar;

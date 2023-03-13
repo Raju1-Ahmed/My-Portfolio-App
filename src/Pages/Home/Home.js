@@ -6,6 +6,7 @@ import Portfolio from './Portfolio';
 import Skills from './Skills';
 
 const Home = () => {
+<h2>This is Home</h2>
     return (
         <div id='home' >
             <Intro></Intro>
