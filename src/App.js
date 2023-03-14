@@ -9,9 +9,9 @@ import { Routes, Route, } from "react-router-dom";
 function App() {
 
   return (
-    <div className="App bg-white dark:bg-black">
+    <div className=" bg-white dark:bg-black">
       <Navbar ></Navbar>
-      {/* <Home></Home> */}
+      <Home></Home>
       
       <Routes>
         <Route path="/home" element={ <Home/> } />

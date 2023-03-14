@@ -15,6 +15,12 @@ module.exports = {
         'bgMenu': '#504D1A',
         'Bcolor': 'turquoise',
       },
+      fontFamily: {
+        sans: [ 'cursive']
+      },
+      backgroundColor: {
+        'dark': '#282828',
+      },
     },
   },
   plugins: [require("daisyui")],
