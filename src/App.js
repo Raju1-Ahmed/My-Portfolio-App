@@ -5,20 +5,19 @@ import Footer from './Pages/Shared/Footer/Footer';
 import Home from './Pages/Home/Home';
 import HireMe from './Pages/Hire/HireMe';
 import { Routes, Route, } from "react-router-dom";
+import Admin from './Pages/Admin/Admin';
 
 function App() {
 
   return (
     <div className=" bg-white dark:bg-black">
       <Navbar ></Navbar>
-      <Home></Home>
-      
       <Routes>
-        <Route path="/home" element={ <Home/> } />
-        <Route path="/hireMe" element={ <HireMe/> } />
-        
+      <Route path="/admin" element={<Admin />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/hireMe" element={<HireMe />} />
       </Routes>
-      </div> 
+    </div>
   );
 }
 

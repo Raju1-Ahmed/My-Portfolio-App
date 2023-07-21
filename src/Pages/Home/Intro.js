@@ -1,78 +1,56 @@
-import React from 'react';
-import { Typewriter } from 'react-simple-typewriter';
+import React, { useEffect, useState } from 'react';
+import {useTypeWriter, Cursor, useTypewriter} from 'react-simple-typewriter';
+import { faFacebook, faGithub, faGoogle, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { FaGoogle, FaLinkedin } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../../asset/logo/raju.png'
 import myImage from '../../asset/portfulioImg/removebg.png'
 import './style.css'
+import { faDownload, faFileContract } from '@fortawesome/free-solid-svg-icons';
 
 
 const Intro = () => {
+    const {text} = useTypewriter({
+        words: ['Developer','Designer', 'Programmer'],
+        loop:{},
+        typeSpeed: 120,
+        deleteSpeed: 80,
+    });
+
     return (
-        <div id='intro' className='mt-[7rem]  '>
-            <h4 className='text-4xl font-bold text-cyan-900 text-center'> Introduction for my self...!</h4>
-            <div class="grid grid-cols-12 items-center justify-center p-3 pt-0">
-                <div className=' lg:col-span-6 col-span-12'>
-                    <img src={myImage} alt="myImage" className='w-full' />
-                </div>
-                <div className='lg:col-span-6 col-span-12'>
-                    <h2 className='text-6xl text-left p-3'>Mern-Stack Developer</h2>
-                    <p className='text-left p-3 text-lg'>Graduate of computer science with experience working across the full-stack of web development.I have built 30+ projects  i am looking for a platfrom where I can grow and continue to learn from other experienced team members</p>
-                    <div className='flex'>
-                        <button class="btn btn-xs sm:btn-sm md:btn-md btn-outline btn-success lg:btn-lg" data-aos="fade-zoom-in"
-                            data-aos-easing="ease-in-back"
-                            data-aos-delay="300"
-                            data-aos-offset="0">
-                            <a href="https://drive.google.com/file/d/1vy3mQmMXStEnb9bhkIVk-Tn67cW9vzsd/view?usp=sharing" target="blank">Download CV</a>
-                        </button>
-                        <a class="btn ml-7 btn-outline btn-success btn-xs sm:btn-sm md:btn-md lg:btn-lg" href="#contract">Contract</a>
+        <div id='intro'>
+            <div class="centered-div">
+            <div class="intro-content">
+                <div class=" content-div">
+                    <div>
+                        <h3 className='text-5xl  mb-2 text-white'>Hello</h3>
+                        <p className='text-2xl text-white'>i'am <span className='text-Bcolor '>Robius-sani</span> Mern-Stack Developer</p>
+                        <p className='text-2xl -mt-3 text-white'>Devoted, innovative, Educational, Hardworking</p>
+                    </div>
+                    <div className='flex justify-start items-center sm -ml-3'>
+                        <a className='text-3xl mr-5 text-black dark:text-Bcolor link-accent' href="https://github.com/Raju1-Ahmed" target="_blank"><FontAwesomeIcon className='p-3 dark:bg-black rounded-full bg-white' icon={faGithub}></FontAwesomeIcon> </a>
+                        <a className='text-3xl mr-5 text-black dark:text-Bcolor link-accent' href="https://github.com/Raju1-Ahmed" target="_blank"><FontAwesomeIcon className='p-3 dark:bg-black rounded-full bg-white' icon={faFacebook}></FontAwesomeIcon> </a>
+                        <a className='text-3xl mr-5 text-black dark:text-Bcolor link-accent' href="https://github.com/Raju1-Ahmed" target="_blank"><FontAwesomeIcon className='p-3 dark:bg-black rounded-full bg-white' icon={faLinkedin}></FontAwesomeIcon> </a>
+                        <a className='text-3xl text-black dark:text-Bcolor link-accent' href="https://github.com/Raju1-Ahmed" target="_blank"><FontAwesomeIcon className='p-3 dark:bg-black rounded-full bg-white' icon={faGoogle}></FontAwesomeIcon> </a>
 
                     </div>
+                    <div className='flex justify-around items-center mt-4 -ml-8 button'>
+                        <a className='A text-xl button-85 dark:text-Bcolor border  rounded p-1 link-accent' href="https://github.com/Raju1-Ahmed" target="_blank">DOWNLOAD CV<FontAwesomeIcon className='ml-2' icon={faDownload}></FontAwesomeIcon> </a>
+                        <a className='B text-xl  button-86 dark:text-Bcolor border  rounded p-3 link-accent' href="https://github.com/Raju1-Ahmed" target="_blank">CONTRACT<FontAwesomeIcon className='ml-2' icon={faFileContract}></FontAwesomeIcon> </a>
+                    </div>
+                </div>
+                <div  className=" logo-div">
+                 <h1 style={{margin: '0px'}} className="text-white text-3xl font-serif">
+                    i'am a|
+                    <span className='text-xl mb-2 text-Bcolor'>
+                        {text}
+                    </span>
+                    <Cursor cursorStyle='<' />
+                 </h1>
                 </div>
             </div>
+            </div>
         </div>
-
-        // <div class="grid grid-rows grid-flow-col gap-4">
-        //     <div className='bg-red-300'>01</div>
-        //     <div className='bg-red-300'>02</div>
-        // </div>
-
-
-
-
-
-        //     <div>
-        //     <p>Hi, i'm </p>
-        //     <h1 class="btn btn-ghost disabled normal-case text-xl"><img className='w-10' src={logo} alt="" />
-        //         <p>obiusSani</p></h1>
-        //     <h2 className='ml-9'>
-        //         {" "}
-        //         As,a...{" "}
-        //         <span style={{ fontWeight: "bold" }}>
-        //             <Typewriter
-        //                 words={['Eat', 'Sleep', 'Code', 'Repeat!']}
-        //                 loop={3}
-        //                 cursor
-        //                 cursorStyle='_'
-        //                 typeSpeed={70}
-        //                 deleteSpeed={50}
-        //                 delaySpeed={1000}
-        //             />
-        //         </span>
-        //     </h2>
-        // </div>
-        // <p class="text-left">Graduate of computer science with experience working across the full-stack of web development.I have built 30+ projects  i am looking for a platfrom where I can grow and continue to learn from other experienced team members</p>
-        // <div className='mt-2'>
-        //     <button class="btn btn-xs sm:btn-sm md:btn-md btn-outline btn-success lg:btn-lg" data-aos="fade-zoom-in"
-        //         data-aos-easing="ease-in-back"
-        //         data-aos-delay="300"
-        //         data-aos-offset="0">
-        //         <a href="https://drive.google.com/file/d/1vy3mQmMXStEnb9bhkIVk-Tn67cW9vzsd/view?usp=sharing" target="blank">Download CV</a>
-        //     </button>
-        //     <a class="btn ml-7 btn-outline btn-success btn-xs sm:btn-sm md:btn-md lg:btn-lg" href="#contract">Contract</a>
-        // </div>
-
-
-
-
     );
 };
 

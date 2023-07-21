@@ -1,48 +1,18 @@
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
+import { FaEllo, FaRegAddressCard, FaFileContract } from "react-icons/fa";
+import { MdDarkMode } from "react-icons/md";
+import { GrProjects } from "react-icons/gr";
+import { GiSkills } from "react-icons/gi";
 import { Link } from 'react-router-dom';
 import logo from '../../../asset/logo/raju.png'
 import '../../Home/style.css'
 
 const Navbar = () => {
 
-  // mobile nav link list icon ========================
-  const options = [
-    { value: "home", label: "Home", href: "", to: "home", icon: "fas fa-home" },
-    { value: "about", label: "hireMe", to: "/hireMe", icon: "fas fa-info-circle" },
-    { value: "contact", label: "portfolio", to: "#portfolio", icon: "fas fa-envelope" },
-  ];
-
-  //  dropdown menu js code  start here  ===================
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(options[0]);
-
-  function toggleDropdown() {
-    setIsOpen(!isOpen);
-  }
-
-  function handleOptionClick(option) {
-    setSelectedOption(option);
-    setIsOpen(false);
-  } ///End============
-
-  //  navbar Scrollpos style code here =======================
-  var prevScrollpos = window.pageYOffset;
-  window.onscroll = function () {
-    var currentScrollPos = window.pageYOffset;
-    if (prevScrollpos > currentScrollPos) {
-      document.getElementById("navbar").style.top = "0";
-    } else {
-      document.getElementById("navbar").style.top = "-50px";
-    }
-    prevScrollpos = currentScrollPos;
-  }  //END ================
-
-
   // Theme dark and light mode code here ===========================
   const [theme, setTheme] = useState(null);
-  console.log(theme);
   useEffect(() => {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setTheme('dark');
@@ -64,66 +34,115 @@ const Navbar = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
   //  The End dark and light mode code code =========================END
+
   return (
-    <div class="centered-div">
-      <div id="navbar" className=' bg-white dark:bg-dark'>
-        <nav className='ContainerWrap'>
-          <ul>
-            {/* icon =============================== */}
-            <div className='navStart'>
-              <a href='#home' class=" normal-case text-xl">
-                <img className='w-6' src={logo} alt="" />
-              </a>
-            </div>
-            {/* main button  */}
-            <div className="navCenter">
-              <li> <a className='dark:text-Bcolor text-black font-bold text-uppercase font-sans' href="#intro"><i class="fa-solid fa-person-chalkboard"></i>Intro</a></li>
-              <li> <a className='dark:text-Bcolor text-black font-bold text-uppercase font-sans' href="#about"><i class="fa-solid fa-address-card"></i>ABOUT</a></li>
-              <li> <a className='dark:text-Bcolor text-black font-bold text-uppercase font-sans' href="#portfolio"><i class="fa-brands fa-servicestack"></i>PORTFOLIO</a></li>
-              <li> <a className='dark:text-Bcolor text-black font-bold text-uppercase font-sans' href="#idname"><i class="fa-solid fa-file-code"></i> Skills</a></li>
-              <li> <a className='dark:text-Bcolor text-black font-bold text-uppercase font-sans' href="#contract"><i class="fa-solid fa-square-envelope"></i>  CONTRACT</a></li>
-            </div> {/* //END========================================= */}
-            {/* =========== dropDown Menu html code start here ============== */}
-            <div className="dropdown">
-              <button className="dropdown-toggle" onClick={toggleDropdown}>
-                <i className={selectedOption.icon}></i> {selectedOption.label}{" "}
-                <i
-                  className={
-                    isOpen ? "fas fa-chevron-up" : "fas fa-chevron-down"
-                  }
-                ></i>
-              </button>
-              <ul className={isOpen ? "dropdown-menu show" : "dropdown-menu"}>
-                {options.map((option) => (
-                  <li key={option.value}>
-                    <Link
-                      to={option.to}
-                      onClick={() => handleOptionClick(option)}
-                    >
-                      <i className={option.icon}></i> {option.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>{/* //END========================================= */}
-            <div className="navEnd">
-              <a className='w-10 text-black dark:text-Bcolor link-accent' href="https://github.com/Raju1-Ahmed" target="_blank"><FontAwesomeIcon icon={faGithub}></FontAwesomeIcon> </a>
-              <img className='rounded-full bg-black dark:bg-dark link' onClick={handleThemeSwitch} src="https://img.icons8.com/external-others-amoghdesign/24/000000/external-mode-multimedia-flat-30px-others-amoghdesign.png" />
-            </div>
+    <div className='bg-black dark:bg-white'>
+
+      <div class="navbar ">
+        <div class="navbar-start">
+          <div class="dropdown bg-black dark:bg-white">
+            <label tabindex="0" class="btn btn-ghost lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:text-black text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            </label>
+            <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+              {/* <li><a>Item 1</a></li>
+              <li>
+                <a>Parent test</a>
+                <ul class="p-2">
+                  <li><a>Submenu 1</a></li>
+                  <li><a>Submenu 2</a></li>
+                </ul>
+              </li>
+              <li><a>Item 3</a></li> */}
+              <li><a className='dark:text-black text-white font-bold text-lg' href="#intro"><FaEllo className='dark:text-black text-white  font-bold text-lg' />Intro</a></li>
+              <li><a className='dark:text-black text-white font-bold text-lg' href="#about">  <FaRegAddressCard className='dark:text-black text-white font-bold text-lg mr-1' />About</a></li>
+              <li><a className='dark:text-black text-white font-bold text-lg' href="#portfolio"> <GrProjects className='dark:text-black text-white font-bold text-lg mr-1' />PORTFOLIO</a> </li>
+              <li><a className='dark:text-black text-white font-bold text-lg' href="#skill"> <GiSkills className='dark:text-black text-white font-bold text-lg mr-1' /> SKILL</a></li>
+              <li><a className='dark:text-black text-white font-bold text-lg' href="#contract"> <FaFileContract className='dark:text-black text-white font-bold text-lg mr-1' />CONTRACT</a></li>
+
+            </ul>
+          </div>
+          {/* <a class="btn btn-ghost normal-case text-xl">daisyUI</a> */}
+          <a href='#home' class="normal-case text-xl"> 
+          <h2 className="dark:text-black text-white font-bold text-lg">Robiul Hasan Razu</h2>
+          {/* <img class='w-6' src={logo} alt="" />  */}
+          </a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+          <ul class="menu menu-horizontal px-1">
+            <li><a className='dark:text-black text-white font-bold text-lg' href="#intro"><FaEllo className='dark:text-black text-white  font-bold text-lg' />Intro</a></li>
+            <li><a className='dark:text-black text-white font-bold text-lg' href="#about">  <FaRegAddressCard className='dark:text-black text-white font-bold text-lg ' />About</a></li>
+            <li><a className='dark:text-black text-white font-bold text-lg' href="#portfolio"> <GrProjects className='dark:text-black text-white font-bold text-lg' />PORTFOLIO</a> </li>
+            <li><a className='dark:text-black text-white font-bold text-lg' href="#skill"> <GiSkills className='dark:text-black text-white font-bold text-lg ' /> SKILL</a></li>
+            <li><a className='dark:text-black text-white font-bold text-lg' href="#contract"> <FaFileContract className='dark:text-black text-white font-bold text-lg ' />CONTRACT</a></li>
+            {/* <li tabindex="0">
+              <details>
+                <summary>Parent for</summary>
+                <ul class="p-2">
+                  <li><a>Submenu 1</a></li>
+                  <li><a>Submenu 2</a></li>
+                </ul>
+              </details>
+            </li> */}
           </ul>
-        </nav>
+        </div>
+        <div class="navbar-end">
+          <div class="flex space-x-3 justify-center items-center">
+            <a href="https://github.com/Raju1-Ahmed" target="_blank">
+              <FontAwesomeIcon icon={faGithub} className='text-Bcolor font-bold text-xl mr-1' ></FontAwesomeIcon>
+            </a>
+            <span onClick={handleThemeSwitch}>
+              <MdDarkMode className='dark:text-black text-white font-bold text-2xl mr-1' />
+            </span>
+          </div>
+        </div>
       </div>
-      <div class="logo-div">
-        <img src="your-logo-url.png" alt="Your Logo"/>
+
     </div>
-    <div class="content-div">
-        <h1>Welcome to my website!</h1>
-        <p>Here's some content for the paragraph.</p> 
-        <button>Click me!</button> 
-    </div>
-</div>
-    
+
   );
 };
 
 export default Navbar;
+
+
+// <div class="flex justify-between items-center bg-black dark:bg-white p-4">
+// {/* <!-- Left side of the menubar --> */}
+{/* <a href='#home' class="normal-case text-xl">
+  <img class='w-6' src={logo} alt="" />
+</a> */}
+
+// {/* <!-- Middle side of the menubar --> */}
+// <ul class="flex space-x-4">
+//   <li className='flex items-center justify-center drawer-button btn btn-sm'>
+//     <FaEllo className='dark:text-black text-white font-bold text-lg mr-1' /> {/* Add classes for the React Icon */}
+//     <a className='dark:text-black text-white font-bold text-lg' href="#intro">Intro</a> {/* Add classes for the anchor tag */}
+//   </li>
+//   <li className='flex items-center justify-center drawer-button btn btn-sm'>
+//     <FaRegAddressCard className='dark:text-black text-white font-bold text-lg mr-1' /> {/* Add classes for the React Icon */}
+//     <a className='dark:text-black text-white font-bold text-lg' href="#about">About</a> {/* Add classes for the anchor tag */}
+//   </li>
+//   <li className='flex items-center justify-center drawer-button btn btn-sm'>
+//     <GrProjects className='dark:text-black text-white font-bold text-lg mr-1' /> {/* Add classes for the React Icon */}
+//     <a className='dark:text-black text-white font-bold text-lg' href="#portfolio">PORTFOLIO</a> {/* Add classes for the anchor tag */}
+//   </li>
+//   <li className='flex items-center justify-center drawer-button btn btn-sm'>
+//     <GiSkills className='dark:text-black text-white font-bold text-lg mr-1' /> {/* Add classes for the React Icon */}
+//     <a className='dark:text-black text-white font-bold text-lg' href="#skill">SKILL</a> {/* Add classes for the anchor tag */}
+//   </li>
+//   <li className='flex items-center justify-center drawer-button btn btn-sm'>
+//     <FaFileContract className='dark:text-black text-white font-bold text-lg mr-1' /> {/* Add classes for the React Icon */}
+//     <a className='dark:text-black text-white font-bold text-lg' href="#contract">CONTRACT</a> {/* Add classes for the anchor tag */}
+//   </li>
+// </ul>
+
+// {/* <!-- Right side of the menubar --> */}
+{/* <div class="flex space-x-3 justify-center items-center">
+  <a href="https://github.com/Raju1-Ahmed" target="_blank">
+    <FontAwesomeIcon icon={faGithub} className='text-Bcolor font-bold text-xl mr-1' ></FontAwesomeIcon>
+  </a>
+  <span onClick={handleThemeSwitch}>
+    <MdDarkMode className='dark:text-black text-white font-bold text-2xl mr-1' />
+  </span>
+</div> */}
+// </div>
