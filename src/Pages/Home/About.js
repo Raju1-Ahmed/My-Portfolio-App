@@ -1,44 +1,70 @@
 import React from 'react';
-import { faGraduationCap, faUniversity } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { GiStabbedNote, GiInspiration, GiBurningPassion } from "react-icons/gi";
+import { MdCastForEducation, MdDiversity2 } from "react-icons/md";
 const About = () => {
     return (
-        <div id='about' className='mt-32'>
-            <h1 class="text-center text-4xl font-bold text-cyan-900">Explain Here About Me..!</h1>
-            <div className='grid lg:grid-cols-2 sm:grid-cols-1 sm:gap-2 lg:gap-3'>
-            <div data-aos="fade-right">
-                    <h1 className='text-3xl  link-accent font-bold'>
-                        <i class="fa-solid fa-house-circle-exclamation"></i>
-                    </h1>
-                    <h1 class="text-3xl  text-cyan-900">HOME</h1>
-                    <p className='py-6 font-bold leading-loose  text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae sequi ad officia tempore incidunt in nihil consequuntur rerum, assumenda magnam enim reiciendis ullam excepturi, tenetur adipisci dicta iure modi saepe!</p>
+        <div id='about' className='container m-auto mt-32' >
+            <div >
+                <h1 class="text-left text-4xl font-bold text-Bcolor ">Programming Carer</h1>
+                <div className='grid lg:grid-cols-2 xl:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 grid-cols-1 justify-items-center mt-16 gap-16'>
+                    <div className='relative'>
+                        <div className='top-0 left-0 mr-3 mb-3 absolute'
+                            style={{ marginleft: "0px", marginTop: "-40px" }} >
+                            <GiStabbedNote className="text-Bcolor text-5xl" />
+                        </div>
+                        <div className='dark:bg-white bg-black p-4'>
+                            <span className='flex mt-2 items-center'>
+                                <h2 className="text-Bcolor font-bold text-2xl text-left">Carer Starting</h2>
+                                <GiInspiration className="dark:text-black text-white ml-2 text-3xl" />
+                            </span>
+                            <p className='dark:text-black text-left text-sm font-bold mt-2 text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis harum molestiae laboriosam dignissimos quis est eligendi excepturi distinctio, consectetur vero laborum possimus eos quia sint architecto nesciunt veniam! Praesentium, a!</p></div>
+                    </div>
+
+                    <div className='relative '>
+                        <div className='top-0 left-0 mr-3 mb-3 absolute'
+                            style={{ marginleft: "0px", marginTop: "-40px" }} >
+                            <GiStabbedNote className="text-Bcolor text-5xl" />
+                        </div>
+                        <div className='dark:bg-white bg-black p-4'>
+                            <span className='flex mt-2 items-center'>
+                                <h2 className="text-Bcolor font-bold text-2xl text-left">Educational Background</h2>
+                                <MdCastForEducation className="dark:text-black text-white ml-2 text-3xl" />
+                            </span>
+                            <p className='dark:text-black text-left text-sm font-bold mt-2 text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis harum molestiae laboriosam dignissimos quis est eligendi excepturi distinctio, consectetur vero laborum possimus eos quia sint architecto nesciunt veniam! Praesentium, a!</p></div>
+                    </div>
+
+                    <div className='relative '>
+                        <div className='top-0 left-0 mr-3 mb-3 absolute'
+                            style={{ marginleft: "0px", marginTop: "-40px" }} >
+                            <GiStabbedNote className="text-Bcolor text-5xl" />
+                        </div>
+                        <div className='dark:bg-white bg-black p-4'>
+                            <span className='flex mt-2 items-center'>
+                                <h2 className="text-Bcolor font-bold text-2xl text-left">University With Programming Carer </h2>
+                                <MdDiversity2 className="dark:text-black text-white ml-2 text-3xl" />
+                            </span>
+                            <p className='dark:text-black text-left text-sm font-bold mt-2 text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis harum molestiae laboriosam dignissimos quis est eligendi excepturi distinctio, consectetur vero laborum possimus eos quia sint architecto nesciunt veniam! Praesentium, a!</p></div>
+                    </div>
+
+                    <div className='relative '>
+                        <div className='top-0 left-0 mr-3 mb-3 absolute'
+                            style={{ marginleft: "0px", marginTop: "-40px" }} >
+                            <GiStabbedNote className="text-Bcolor text-5xl" />
+                        </div>
+                        <div className='dark:bg-white bg-black p-4 shadow-5xl shadow-Bcolor rounded'>
+                            <span className='flex mt-2 items-center'>
+                                <h2 className="text-Bcolor font-bold text-2xl text-left">Why Now Carer is My Passion</h2>
+                                <GiBurningPassion className="dark:text-black text-white ml-2 text-3xl" />
+                            </span>
+                            <p className='dark:text-black text-white text-left text-sm font-bold mt-2 '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis harum molestiae laboriosam dignissimos quis est eligendi excepturi distinctio, consectetur vero laborum possimus eos quia sint architecto nesciunt veniam! Praesentium, a!</p></div>
+                    </div>
+
                 </div>
-                <div data-aos="fade-left"> 
-                    <h1 className='text-3xl  link-accent font-bold'>
-                 <i class="fa-solid  fa-school-circle-exclamation"></i>
-                    </h1>
-                    <h1 class="text-3xl text-cyan-900">School</h1>
-                    <p className='py-6 font-bold leading-loose  text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae sequi ad officia tempore incidunt in nihil consequuntur rerum, assumenda magnam enim reiciendis ullam excepturi, tenetur adipisci dicta iure modi saepe!</p>
-                </div>
-                <div data-aos="fade-up-right">
-                    <span>
-                        <h1 className='text-5xl text-violet-50 font-bold'>
-                            <FontAwesomeIcon icon={faUniversity} className='w-10 link link-accent'></FontAwesomeIcon>
-                        </h1>
-                        <h1 class="text-3xl  text-cyan-900">University</h1>
-                        <p class="py-6 font-bold leading-loose   text-center">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                    </span>
-                </div>
-                <div data-aos="fade-up-left">
-                    <h1 className='text-5xl text-violet-50 font-bold'>
-                        <FontAwesomeIcon icon={faGraduationCap} className='w-10 link link-accent'></FontAwesomeIcon>                    </h1>
-                    <h1 class="text-3xl text-cyan-900">Graduation</h1>
-                    <p className='py-6 font-bold leading-loose  text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae sequi ad officia tempore incidunt in nihil consequuntur rerum, assumenda magnam enim reiciendis ullam excepturi, tenetur adipisci dicta iure modi saepe!</p>
-                </div>
+
             </div>
         </div>
     );
 };
 
 export default About;
+

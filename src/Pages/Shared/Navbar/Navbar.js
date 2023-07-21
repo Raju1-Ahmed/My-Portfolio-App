@@ -41,10 +41,10 @@ const Navbar = () => {
       <div class="navbar ">
         <div class="navbar-start">
           <div class="dropdown bg-black dark:bg-white">
-            <label tabindex="0" class="btn btn-ghost lg:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:text-black text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            <label tabindex="0" class="btn btn-ghost dark:text-black text-white lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 " fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </label>
-            <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black dark:bg-white rounded-box w-52">
               {/* <li><a>Item 1</a></li>
               <li>
                 <a>Parent test</a>
@@ -59,13 +59,12 @@ const Navbar = () => {
               <li><a className='dark:text-black text-white font-bold text-lg' href="#portfolio"> <GrProjects className='dark:text-black text-white font-bold text-lg mr-1' />PORTFOLIO</a> </li>
               <li><a className='dark:text-black text-white font-bold text-lg' href="#skill"> <GiSkills className='dark:text-black text-white font-bold text-lg mr-1' /> SKILL</a></li>
               <li><a className='dark:text-black text-white font-bold text-lg' href="#contract"> <FaFileContract className='dark:text-black text-white font-bold text-lg mr-1' />CONTRACT</a></li>
-
             </ul>
           </div>
           {/* <a class="btn btn-ghost normal-case text-xl">daisyUI</a> */}
-          <a href='#home' class="normal-case text-xl"> 
-          <h2 className="dark:text-black text-white font-bold text-lg">Robiul Hasan Razu</h2>
-          {/* <img class='w-6' src={logo} alt="" />  */}
+          <a href='#home' class="normal-case text-xl">
+            <h2 className="dark:text-black text-white font-bold text-lg">Robiul Hasan Razu</h2>
+            {/* <img class='w-6' src={logo} alt="" />  */}
           </a>
         </div>
         <div class="navbar-center hidden lg:flex">
