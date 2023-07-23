@@ -23,29 +23,88 @@ const Admin = () => {
     getFilesList();
   }, []);
 
-  const downloadFile = async (id, path, mimetype) => {
+  // const downloadFile = async (id, path, mimetype) => {
+  //   try {
+  //     const result = await axios.get(`${API_URL}/download/${id}`, {
+  //       responseType: 'blob',
+  //     });
+  //     const split = path.split('/');
+  //     const filename = split[split.length - 1];
+  //     setErrorMsg('');
+
+  //     // Download the file using the 'downloadjs' library
+  //     download(result.data, filename, mimetype);
+
+  //     // Display a success popup after download
+  //     displayPopup('File downloaded successfully!');
+  //   } catch (error) {
+  //     if (error.response && error.response.status === 400) {
+  //       setErrorMsg('Error while downloading file. Try again later');
+  //     }
+
+  //     // Display an error popup if there's an error during download
+  //     displayPopup('Error downloading file. Please try again later.');
+  //   }
+  // };
+  const downloadFile = async (_id, filepath, mimetype) => {
+    console.log('File ID ',_id, 'FilePath:', filepath);
     try {
-      const result = await axios.get(`${API_URL}/download/${id}`, {
-        responseType: 'blob',
+      const result = await axios.get(`${API_URL}/download/${_id}`, {
+        responseType: 'blob'
       });
-      const split = path.split('/');
+      
+      if (!filepath || typeof filepath !== 'string') {
+        throw new Error('Invalid file path.');
+      }
+  
+      const split = filepath.split('/');
       const filename = split[split.length - 1];
       setErrorMsg('');
-
-      // Download the file using the 'downloadjs' library
-      download(result.data, filename, mimetype);
-
-      // Display a success popup after download
-      displayPopup('File downloaded successfully!');
+      return download(result.data, filename, mimetype);
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        setErrorMsg('Error while downloading file. Try again later');
-      }
-
-      // Display an error popup if there's an error during download
-      displayPopup('Error downloading file. Please try again later.');
+      setErrorMsg(error.message || 'Error while downloading file. Try again later');
     }
   };
+  
+  
+    // ... (existing code)
+
+     // ... (existing code)
+
+  // const downloadFile = async (id, path, mimetype) => {
+  //   try {
+  //     const result = await axios.get(`${API_URL}/download/${id}`, {
+  //       responseType: 'blob',
+  //     });
+  //     const split = path.split('/');
+  //     const filename = split[split.length - 1];
+  //     setErrorMsg('');
+
+  //     // Download the file using the 'downloadjs' library
+  //     download(result.data, filename, mimetype);
+
+  //     // Display a success popup after download
+  //     displayPopup('File downloaded successfully!');
+  //   } catch (error) {
+  //     if (error.response && error.response.status === 400) {
+  //       setErrorMsg('Error while downloading the file. Please try again later.');
+  //     } else {
+  //       setErrorMsg('Something went wrong. Please try again later.');
+  //     }
+
+  //     // Display an error popup if there's an error during download
+  //     displayPopup('Error downloading the file. Please try again later.');
+  //   }
+  // };
+
+  // ... (existing code)
+  
+  
+    // ... (existing code)
+
+
+
+
 
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -99,14 +158,14 @@ const Admin = () => {
         <table className="files-table">
           <thead>
             <tr>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Download File</th>
+              <th>ID+</th>
+              <th>File Name</th>
+              <th>File Path</th>
             </tr>
           </thead>
           <tbody>
             {filesList.length > 0 ? (
-              filesList.map(({ _id, file_path, file_mimetype, filename, filePath}) => (
+              filesList.map(({ _id,  file_mimetype, filename, filePath}) => (
                 <tr key={_id}>
                   <td>{_id}</td>
                   <td>{filename}</td>
@@ -114,7 +173,7 @@ const Admin = () => {
                   <td>
                     <a
                       href="#/"
-                      onClick={() => downloadFile(_id, file_path, file_mimetype)}
+                      onClick={() => downloadFile(_id, filePath, file_mimetype)}
                     >
                       Download
                     </a>
