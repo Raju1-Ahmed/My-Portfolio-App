@@ -23,29 +23,6 @@ const Admin = () => {
     getFilesList();
   }, []);
 
-  // const downloadFile = async (id, path, mimetype) => {
-  //   try {
-  //     const result = await axios.get(`${API_URL}/download/${id}`, {
-  //       responseType: 'blob',
-  //     });
-  //     const split = path.split('/');
-  //     const filename = split[split.length - 1];
-  //     setErrorMsg('');
-
-  //     // Download the file using the 'downloadjs' library
-  //     download(result.data, filename, mimetype);
-
-  //     // Display a success popup after download
-  //     displayPopup('File downloaded successfully!');
-  //   } catch (error) {
-  //     if (error.response && error.response.status === 400) {
-  //       setErrorMsg('Error while downloading file. Try again later');
-  //     }
-
-  //     // Display an error popup if there's an error during download
-  //     displayPopup('Error downloading file. Please try again later.');
-  //   }
-  // };
   const downloadFile = async (_id, filepath, mimetype) => {
     console.log('File ID ',_id, 'FilePath:', filepath);
     try {
@@ -66,42 +43,19 @@ const Admin = () => {
     }
   };
   
-  
-    // ... (existing code)
 
-     // ... (existing code)
+  const handleDelete = async (id) => {
+    try {
+      // Make a DELETE request to the backend API to delete the file by ID
+      await axios.delete(`${API_URL}/delete/${id}`);
 
-  // const downloadFile = async (id, path, mimetype) => {
-  //   try {
-  //     const result = await axios.get(`${API_URL}/download/${id}`, {
-  //       responseType: 'blob',
-  //     });
-  //     const split = path.split('/');
-  //     const filename = split[split.length - 1];
-  //     setErrorMsg('');
-
-  //     // Download the file using the 'downloadjs' library
-  //     download(result.data, filename, mimetype);
-
-  //     // Display a success popup after download
-  //     displayPopup('File downloaded successfully!');
-  //   } catch (error) {
-  //     if (error.response && error.response.status === 400) {
-  //       setErrorMsg('Error while downloading the file. Please try again later.');
-  //     } else {
-  //       setErrorMsg('Something went wrong. Please try again later.');
-  //     }
-
-  //     // Display an error popup if there's an error during download
-  //     displayPopup('Error downloading the file. Please try again later.');
-  //   }
-  // };
-
-  // ... (existing code)
-  
-  
-    // ... (existing code)
-
+      // If the deletion is successful, update the filesList state to remove the deleted file
+      setFilesList((prevFiles) => prevFiles.filter((file) => file._id !== id));
+    } catch (error) {
+      console.error('Error while deleting the file:', error);
+      // Handle any errors during deletion if needed
+    }
+  };
 
 
 
@@ -190,6 +144,55 @@ const Admin = () => {
           </tbody>
         </table>
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <div className="files-container">
+      {/* Display the list of files */}
+      <table className="files-table">
+        {/* Table headers */}
+        {/* Table body */}
+        <tbody>
+          {filesList.length > 0 ? (
+            filesList.map(({ _id, filename }) => (
+              <tr key={_id}>
+                <td>{filename}</td>
+                <td>
+                  {/* Add a "Delete" button for each file */}
+                  <button onClick={() => handleDelete(_id)}>Delete</button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={2}>No files found. Please add some.</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <br />
       <br />
       <br />
