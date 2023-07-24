@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import download from 'downloadjs';
 import { API_URL } from '../utils/constants';
 import Popup from '../../components/Popup'; // Make sure to update the path if needed
+import ProductUpload from './ProductUpload';
+import FontendList from '../../components/FontendList';
+import ProductDelete from './ProductDelete';
 
 const Admin = () => {
   const [filesList, setFilesList] = useState([]);
@@ -24,16 +27,16 @@ const Admin = () => {
   }, []);
 
   const downloadFile = async (_id, filepath, mimetype) => {
-    console.log('File ID ',_id, 'FilePath:', filepath);
+    console.log('File ID ', _id, 'FilePath:', filepath);
     try {
       const result = await axios.get(`${API_URL}/download/${_id}`, {
         responseType: 'blob'
       });
-      
+
       if (!filepath || typeof filepath !== 'string') {
         throw new Error('Invalid file path.');
       }
-  
+
       const split = filepath.split('/');
       const filename = split[split.length - 1];
       setErrorMsg('');
@@ -42,7 +45,7 @@ const Admin = () => {
       setErrorMsg(error.message || 'Error while downloading file. Try again later');
     }
   };
-  
+
 
   const handleDelete = async (id) => {
     try {
@@ -119,7 +122,7 @@ const Admin = () => {
           </thead>
           <tbody>
             {filesList.length > 0 ? (
-              filesList.map(({ _id,  file_mimetype, filename, filePath}) => (
+              filesList.map(({ _id, file_mimetype, filename, filePath }) => (
                 <tr key={_id}>
                   <td>{_id}</td>
                   <td>{filename}</td>
@@ -159,29 +162,29 @@ const Admin = () => {
       <br />
       <br />
       <div className="files-container">
-      {/* Display the list of files */}
-      <table className="files-table">
-        {/* Table headers */}
-        {/* Table body */}
-        <tbody>
-          {filesList.length > 0 ? (
-            filesList.map(({ _id, filename }) => (
-              <tr key={_id}>
-                <td>{filename}</td>
-                <td>
-                  {/* Add a "Delete" button for each file */}
-                  <button onClick={() => handleDelete(_id)}>Delete</button>
-                </td>
+        {/* Display the list of files */}
+        <table className="files-table">
+          {/* Table headers */}
+          {/* Table body */}
+          <tbody>
+            {filesList.length > 0 ? (
+              filesList.map(({ _id, filename }) => (
+                <tr key={_id}>
+                  <td>{filename}</td>
+                  <td>
+                    {/* Add a "Delete" button for each file */}
+                    <button onClick={() => handleDelete(_id)}>Delete</button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={2}>No files found. Please add some.</td>
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={2}>No files found. Please add some.</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+            )}
+          </tbody>
+        </table>
+      </div>
       <br />
       <br />
       <br />
@@ -194,6 +197,35 @@ const Admin = () => {
       <br />
       <br />
       <br />
+      <br />
+      <br />
+
+      <ProductUpload />
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <FontendList/>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <ProductDelete/>
       <br />
       <br />
       <br />
