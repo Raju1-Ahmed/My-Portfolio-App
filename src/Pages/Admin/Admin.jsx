@@ -6,6 +6,7 @@ import Popup from '../../components/Popup'; // Make sure to update the path if n
 import ProductUpload from './ProductUpload';
 import FontendList from '../../components/FontendList';
 import ProductDelete from './ProductDelete';
+import ProjectCategory from '../category/ProjectCategory';
 
 const Admin = () => {
   const [filesList, setFilesList] = useState([]);
@@ -226,6 +227,37 @@ const Admin = () => {
       <br />
       <br />
       <ProductDelete/>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
+              {/* <ProjectCategory/> */}
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <br />
       <br />
       <br />

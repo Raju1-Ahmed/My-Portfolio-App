@@ -31,9 +31,9 @@ const ProductList = () => {
     return (
       <div className="product-list-container">
         <h2>Product List</h2>
-        <ul className="product-list">
+        <ul className="product-list grid grid-cols-4 gap-6">
           {products.map((product) => (
-            <li key={product._id} className="product-item">
+            <li key={product._id} className="product-item ">
               <h3>{product.name}</h3>
               <h3>{product.futureField}</h3>
               <button onClick={() => handleProductClick(product._id)}>View Details</button>

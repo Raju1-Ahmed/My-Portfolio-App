@@ -1,96 +1,108 @@
 import React, { useEffect, useState } from 'react';
-import { faFileCode, faLink, faServer, } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import { faFileCode, faLink, faServer } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import autoParts from '../../asset/portfulioImg/auto-parts_1.png'
-import ClothingWerehouse from '../../asset/portfulioImg/clothingWerehouse.png'
-import limboflaw from '../../asset/portfulioImg/Happy-Cart.png'
-import './style.css'
-const Portfolio = () => {
-    const [videoLoaded, setVideoLoaded] = useState(false);
+import Slider from 'react-slick';
+import './style.css';
+import ReactPlayer from 'react-player';
 
-    useEffect(() => {
-      const video = document.getElementById('autoplayVideo');
-  
-      const playVideo = () => {
-        if (video) {
-          video.play().catch((error) => {
-            console.error('Autoplay failed:', error);
-          });
-          setVideoLoaded(true);
-        }
-      };
-  
-      const handleLoad = () => {
-        // Delay autoplay to ensure the video is ready
-        setTimeout(playVideo, 500);
-      };
-  
-      // Listen to the 'loadedmetadata' event to ensure the video is ready
-      video.addEventListener('loadedmetadata', handleLoad);
-  
-      return () => {
-        video.removeEventListener('loadedmetadata', handleLoad);
-      };
-    }, []);
-    return (
-        <div id='portfolio'>
-            <h4 className='place-items-center mb-4 text-bold text-5xl text-zinc-100'>My Portfolio</h4>
-            <div className='border drop-shadow-2xl rounded bg-current p-2 mx-3 mb-5'>
-                <div class="lg:flex  lg:flex-row sm:flex-col ">
-                    <div data-aos="fade-left" className="basis-2/5">
-                        {/* <img src={autoParts} className='' alt="autoParts" /> */}
-                        <div className="video-container">
-                            <video id="autoplayVideo" muted loop>
-                                <source src="https://treehouse-code-samples.s3.amazonaws.com/html-video-and-audio/bridge.mp4" type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
-                            {!videoLoaded && (
-                                <div className="play-button-container">
-                                    <div className="play-button" onClick={() => setVideoLoaded(true)}>
-                                        <i className="fa fa-play"></i>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                    <div data-aos="fade-right" className="basis-full lg:ml-3  rounded-lg">
-                        <h2 className='text-center text-zinc-900 text-2xl'>Auto Parts</h2>
-                        <p className='text-zinc-900 text-left text-base'>Here you will find all the necessary parts for a microcar user can order services and need to payment and then user payment will successful user Can Delete their order and also they can give a review and see their order status. </p>
-                        <div className='grid grid-cols-3 lg:gap-4 gap-3 mt-[40px] m-2'>
-                            <button class="btn">
-                                <a href="https://github.com/Raju1-Ahmed/creative-agency-clint" target="_blank">
-                                    <FontAwesomeIcon icon={faFileCode} className='w-10  link link-accent'></FontAwesomeIcon> ClientCode</a>
-                            </button>
-                            <button class="btn">
-                                <a href="https://github.com/Raju1-Ahmed/creative-agency-server" target="_blank">
-                                    <FontAwesomeIcon icon={faServer} className='w-10  link link-accent'></FontAwesomeIcon> ServerCode</a>
-                            </button>
-                            <button class="btn">
-                                <a href="https://creative-agency-a0c6f.web.app" target="blank">
-                                    <FontAwesomeIcon icon={faLink} className='w-10 link link-accent'></FontAwesomeIcon>Live</a>
-                            </button>
-                        </div>
-                    </div>
+const Portfolio = () => {
+  const [products, setProducts] = useState([]);
+  console.log(products);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  useEffect(() => {
+    // Fetch products from the backend API
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/v1/file/product');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
+  const handlePlay = () => {
+    const video = document.getElementById('autoplayVideo');
+    if (video) {
+      video.play().catch((error) => {
+        console.error('Autoplay failed:', error);
+      });
+      setVideoLoaded(true);
+    }
+  };
+
+  return (
+    <div className="container mx-auto">
+      <h2> Single Item</h2>
+      <Slider {...settings}>
+        {products.map((product) => (
+          <div className="border-Bcolor border-none md:border-2 drop-shadow-2xl rounded  dark:bg-white  bg-black" key={product._id}>
+            <div className="lg:flex xl:flex md:flex p-2 md:p-0 items-center justify-around">
+              <div>
+                <div className="">
+                  <ReactPlayer
+                    url={product.video.filePath}
+                    playing={!videoLoaded} // Autoplay when videoLoaded is false
+                    loop
+                    muted
+                    width="100%"
+                    height="100%"
+                  />
                 </div>
+              </div>
+
+              <div className='dark:bg-white md:px-5 md:mt-7 mt-3  bg-black'>
+                <span className="flex justify-between  items-center">
+                  <h2 className="md:text-4xl text-xl md:font-black dark:text-black text-white">{product.name}</h2>
+                  <h2 className="  text-Bcolor text-base">Future: {product.futureField} Project</h2>
+                </span>
+                <p className="text-Bcolor text-right  text-base">Last update: {new Date(product.date).toLocaleDateString()}</p> {/* Display Date */}
+                <p className="dark:text-black text-white text-left text-sm md:text-lg ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique rerum, omnis sit recusandae tempora ea, minus illum, eos voluptate molestias magnam accusamus soluta officia reiciendis nesciunt fugit laboriosam alias ab.</p>
+                <div className='flex justify-start items-end'>
+                  <button className="btn sm:hidden md:block  dark:bg-black bg-white dark:text-white text-black">
+                    <a href={product.clientURL} target="_blank" rel="noopener noreferrer">
+                      <FontAwesomeIcon icon={faFileCode} className="w-10 link link-accent" />
+                      ClientCode
+                    </a>
+                  </button>
+
+                  <a className="hidden" href={product.clientURL} target="_blank" rel="noopener noreferrer">
+                      ClientCode
+                    </a>
+
+                  <button className="btn ml-5 dark:bg-black bg-white dark:text-white text-black">
+                    <a href={product.serverURL} target="_blank" rel="noopener noreferrer">
+                      <FontAwesomeIcon icon={faServer} className="w-10 link link-accent" />
+                      ServerCode
+                    </a>
+                  </button>
+                  <button className="btn ml-5 dark:bg-black bg-white dark:text-white text-black">
+                    <a href={product.demoURL} target="_blank" rel="noopener noreferrer">
+                      <FontAwesomeIcon icon={faLink} className="w-10 link link-accent" />
+                      DEMO
+                    </a>
+                  </button>
+                </div>
+              </div>
+
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-        </div>
-    );
+          </div>
+        ))}
+      </Slider>
+    </div>
+  );
 };
 
 export default Portfolio;

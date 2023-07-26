@@ -4,6 +4,8 @@ import Contract from './Contract';
 import Intro from './Intro';
 import Portfolio from './Portfolio';
 import Skills from './Skills';
+import ProjectCategory from '../category/ProjectCategory';
+import EmailSend from '../../components/email/EmailSend';
 
 const Home = () => {
 <h2>This is Home</h2>
@@ -11,9 +13,11 @@ const Home = () => {
         <div id='home' >
             <Intro></Intro>
             <About></About>
-           <Portfolio></Portfolio> 
-            {/* <Skills></Skills> */}
-            {/* <Contract></Contract> */}
+            <ProjectCategory/>
+           {/* <Portfolio></Portfolio>  */}
+             <Skills></Skills> 
+             <EmailSend/>
+             <Contract></Contract> 
         </div>
     );
 };

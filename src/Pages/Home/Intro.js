@@ -93,14 +93,13 @@ const Intro = () => {
                                             <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-blue-500"></div>
                                         </div>
                                     ) : singleFile ? (
-                                        <button className='A text-xl button-85 dark:text-Bcolor border  rounded p-1 link-accent' onClick={() => downloadFile(singleFile._id, singleFile.filePath, singleFile.file_mimetype)}>
+                                        <button className='A md:text-xl text-sm button-85 dark:text-Bcolor border  rounded p-1 link-accent' onClick={() => downloadFile(singleFile._id, singleFile.filePath, singleFile.file_mimetype)}>
                                             DOWNLOAD CV <FontAwesomeIcon className='ml-2' icon={faDownload}/>
                                         </button> 
                                     ) : (
                                         <p style={{ fontWeight: '300' }}>No files found. Please add some.</p>
                                     )}
                                 </div>
-
                                 <a className='B text-xl  button-86 dark:text-Bcolor border  rounded p-3 link-accent' href="https://github.com/Raju1-Ahmed" target="_blank">CONTRACT<FontAwesomeIcon className='ml-2' icon={faFileContract}></FontAwesomeIcon> </a>
                             </div>
                         </div>

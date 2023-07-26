@@ -120,7 +120,15 @@ const ProductUpload = () => {
         </div>
         <button type="submit" className="submit-button">Create Product</button>
       </form>
-      
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
       <ProductList />
     </div>
   );
