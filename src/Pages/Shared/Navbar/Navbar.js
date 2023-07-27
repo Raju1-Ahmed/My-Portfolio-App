@@ -36,7 +36,7 @@ const Navbar = () => {
   //  The End dark and light mode code code =========================END
 
   return (
-    <div className='bg-black dark:bg-white'>
+    <div id="menuBar" className='bg-black dark:bg-white'>
 
       <div class="navbar ">
         <div class="navbar-start">

@@ -1,0 +1,106 @@
+
+  /* Form styles */
+  .emailForm {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .emailForm h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .emailForm label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .emailForm input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+ .emailForm textarea {
+    resize: vertical;
+  }
+  
+  .emailForm button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #4caf50;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .emailForm button:hover {
+    background-color: #45a049;
+  }
+  
+ .emailForm button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .emailForm button[disabled]::after {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top: 2px solid #4caf50;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+
+
+  /* List item styles */
+li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  /* FontAwesome icon styles */
+  .socialLink .icon {
+    width: 1.25rem; /* Adjust the size as desired */
+    height: 1.25rem;
+    color: #007BFF; /* Replace with your desired icon color */
+  }
+  
+  /* Anchor tag styles */
+  .socialLink a {
+    text-decoration: none;
+    color: #007BFF; /* Replace with your desired link color */
+    font-weight: bold;
+    padding: 0.5rem; /* Adjust padding as desired */
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .socialLink a:hover {
+    background-color: #f1f1f1; /* Replace with your desired hover background color */
+    color: #0056b3; /* Replace with your desired hover link color */
+  }
