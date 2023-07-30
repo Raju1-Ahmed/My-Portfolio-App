@@ -90,64 +90,69 @@ const ProjectCategory = () => {
                     <div className="spinner"></div>
                 </div>
             ) : (
-            <div className="tab-content sm:mt-5 mt-10 sm:pl-0 pl-2 ">
+            <div className="tab-content sm:mt-5 sm:pl-0 pl-2 ">
                 <Slider {...settings}>
                     {filteredProducts.map((product) => (
                         <div className=" drop-shadow-2xl rounded " key={product._id}>
-                            <div className="lg:flex xl:flex md:flex p-2 md:p-0 items-center justify-around">
-                                <div>
-                                {/* {!videoLoaded && <div className="spinner"></div>} */}
-                                    <ReactPlayer
-                                        // id="autoplayVideo"
-                                        url={product.video.filePath}
-                                        playing={!videoLoaded} // Autoplay when videoLoaded is false
-                                        loop
-                                        muted
-                                        width="100%"
-                                        height="100%"
-                                        onReady={handlePlay} // Call handlePlay when the video is ready
-                                    />
-                                </div>
-
-                                <div className='md:px-5 md:mt-3 mt-3 '>
-                                    <span className="flex justify-between  items-center">
-                                        <h2 className="md:text-4xl text-xl md:font-black dark:text-white text-black">{product.name}</h2>
-                                        <h2 className="  text-Bcolor text-base">Future: {product.futureField} Project</h2>
-                                    </span>
-                                    <p className="text-Bcolor text-right  text-base">Last update: {new Date(product.date).toLocaleDateString()}</p> {/* Display Date */}
-                                    <p className="dark:text-white text-black text-left text-sm md:text-lg ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique rerum, omnis sit recusandae tempora ea, minus illum, eos voluptate molestias magnam accusamus soluta officia reiciendis nesciunt fugit laboriosam alias ab.</p>
-                                    <div className='sm:flex hidden justify-start items-end'>
-                                        <button className="btn dark:bg-black bg-white dark:text-white text-black">
-                                            <a href={product.clientURL} target="_blank" rel="noopener noreferrer">
-                                                <FontAwesomeIcon icon={faFileCode} className="w-10 link link-accent" />
-                                                ClientCode
-                                            </a>
-                                        </button>
-                                        <button className="btn ml-5 dark:bg-black bg-white dark:text-white text-black">
-                                            <a href={product.serverURL} target="_blank" rel="noopener noreferrer">
-                                                <FontAwesomeIcon icon={faServer} className="w-10 link link-accent" />
-                                                ServerCode
-                                            </a>
-                                        </button>
-                                        <button className="btn ml-5 dark:bg-black bg-white dark:text-white text-black">
-                                            <a href={product.demoURL} target="_blank" rel="noopener noreferrer">
-                                                <FontAwesomeIcon icon={faLink} className="w-10 link link-accent" /> DEMO
-                                            </a>
-                                        </button>
+                        <div className="min-h-screen  px-4 flex flex-col items-center justify-around md:flex-row md:justify-center">
+                                    <div className="email-div-bg md:mr-4 md:w-2/4 rounded-lg shadow-lg p-2 flex items-center justify-center">
+                                        <ReactPlayer
+                                            url={product.video.filePath}
+                                            playing={!videoLoaded} // Autoplay when videoLoaded is false
+                                            loop
+                                            muted
+                                            width="100%"
+                                            height="100%"
+                                            onReady={() => setVideoLoaded(true)} // Call setVideoLoaded when the video is ready
+                                        />
                                     </div>
-                                    <div className='flex sm:hidden justify-around items-center'>
-                                        <a className="dark:text-white text-black  border border-Bcolor rounded" href={product.clientURL} target="_blank" rel="noopener noreferrer">
+
+                                    <div className="email-wrap-bg mt-4 md:mt-0 md:w-2/4 rounded-lg shadow-lg p-2">
+                                        <span className="flex justify-between items-center">
+                                            <h2 className="md:text-4xl text-xl md:font-black text-black mb-4">{product.name}</h2>
+                                            <h2 className="text-Bcolor text-base">Future: {product.futureField} Project</h2>
+                                        </span>
+                                        <p className="text-Bcolor text-right text-base">Last update: {new Date(product.date).toLocaleDateString()}</p>
+                                        <p className="text-lg text-left text-gray-800 dark:text-gray-100 leading-relaxed mb-4">
+                                            recusandae tempora ea, minus illum, eos voluptate molestias magnam accusamus soluta
+                                            officia reiciendis nesciunt fugit laboriosam alias ab. 
+                                            consectetur adipisicing elit. Unde maxime omnis, cumque ipsam iusto, optio perferendis
+                                            minima fugit sequi at ab aspernatur, aut delectus quo ea sapiente natus dolores.
+                                            Dolores.
+                                        </p>
+                                        <div className='hidden sm:flex justify-around items-center'>
+                                            <button className="btn dark:bg-black bg-white dark:text-white text-black">
+                                                <a href={product.clientURL} target="_blank" rel="noopener noreferrer">
+                                                    <FontAwesomeIcon icon={faFileCode} className="w-10 link link-accent" />
+                                                    ClientCode
+                                                </a>
+                                            </button>
+                                            <button className="btn ml-5 dark:bg-black bg-white dark:text-white text-black">
+                                                <a href={product.serverURL} target="_blank" rel="noopener noreferrer">
+                                                    <FontAwesomeIcon icon={faServer} className="w-10 link link-accent" />
+                                                    ServerCode
+                                                </a>
+                                            </button>
+                                            <button className="btn ml-5 dark:bg-black bg-white dark:text-white text-black">
+                                                <a href={product.demoURL} target="_blank" rel="noopener noreferrer">
+                                                    <FontAwesomeIcon icon={faLink} className="w-10 link link-accent" />
+                                                    DEMO
+                                                </a>
+                                            </button>
+                                        </div>
+                                        <div className='flex sm:hidden justify-around items-center'>
+                                        <a className="dark:text-white text-black p-1 border border-Bcolor rounded" href={product.clientURL} target="_blank" rel="noopener noreferrer">
                                             ClientCode<FontAwesomeIcon icon={faFileCode} className="w-10 link link-accent" />
                                         </a>
-                                        <a className="dark:text-white text-black  border border-Bcolor rounded" href={product.serverURL} target="_blank" rel="noopener noreferrer">
+                                        <a className="dark:text-white text-black p-1  border border-Bcolor rounded" href={product.serverURL} target="_blank" rel="noopener noreferrer">
                                             ServerCode<FontAwesomeIcon icon={faServer} className="w-10 link link-accent" />
                                         </a>
-                                        <a className="dark:text-white text-black border border-Bcolor rounded" href={product.demoURL} target="_blank" rel="noopener noreferrer">
+                                        <a className="dark:text-white text-black p-1 border border-Bcolor rounded" href={product.demoURL} target="_blank" rel="noopener noreferrer">
                                             DEMO<FontAwesomeIcon icon={faLink} className="w-10 link link-accent" />
                                         </a>
                                     </div>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                     ))}
                 </Slider>
@@ -158,3 +163,57 @@ const ProjectCategory = () => {
 };
 
 export default ProjectCategory;
+//    <div className="lg:flex xl:flex md:flex p-2 md:p-0 items-center justify-around">
+//                                 <div>
+//                                 {/* {!videoLoaded && <div className="spinner"></div>} */}
+//                                     <ReactPlayer
+//                                         // id="autoplayVideo"
+//                                         url={product.video.filePath}
+//                                         playing={!videoLoaded} // Autoplay when videoLoaded is false
+//                                         loop
+//                                         muted
+//                                         width="100%"
+//                                         height="100%"
+//                                         onReady={handlePlay} // Call handlePlay when the video is ready
+//                                     />
+//                                 </div>
+
+//                                 <div className='md:px-5 md:mt-3 mt-3 '>
+//                                     <span className="flex justify-between  items-center">
+//                                         <h2 className="md:text-4xl text-xl md:font-black dark:text-white text-black">{product.name}</h2>
+//                                         <h2 className="  text-Bcolor text-base">Future: {product.futureField} Project</h2>
+//                                     </span>
+//                                     <p className="text-Bcolor text-right  text-base">Last update: {new Date(product.date).toLocaleDateString()}</p> {/* Display Date */}
+//                                     <p className="dark:text-white text-black text-left text-sm md:text-lg ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique rerum, omnis sit recusandae tempora ea, minus illum, eos voluptate molestias magnam accusamus soluta officia reiciendis nesciunt fugit laboriosam alias ab.</p>
+//                                     <div className='sm:flex hidden justify-start items-end'>
+//                                         <button className="btn dark:bg-black bg-white dark:text-white text-black">
+//                                             <a href={product.clientURL} target="_blank" rel="noopener noreferrer">
+//                                                 <FontAwesomeIcon icon={faFileCode} className="w-10 link link-accent" />
+//                                                 ClientCode
+//                                             </a>
+//                                         </button>
+//                                         <button className="btn ml-5 dark:bg-black bg-white dark:text-white text-black">
+//                                             <a href={product.serverURL} target="_blank" rel="noopener noreferrer">
+//                                                 <FontAwesomeIcon icon={faServer} className="w-10 link link-accent" />
+//                                                 ServerCode
+//                                             </a>
+//                                         </button>
+//                                         <button className="btn ml-5 dark:bg-black bg-white dark:text-white text-black">
+//                                             <a href={product.demoURL} target="_blank" rel="noopener noreferrer">
+//                                                 <FontAwesomeIcon icon={faLink} className="w-10 link link-accent" /> DEMO
+//                                             </a>
+//                                         </button>
+//                                     </div>
+                                    // <div className='flex sm:hidden justify-around items-center'>
+                                    //     <a className="dark:text-white text-black  border border-Bcolor rounded" href={product.clientURL} target="_blank" rel="noopener noreferrer">
+                                    //         ClientCode<FontAwesomeIcon icon={faFileCode} className="w-10 link link-accent" />
+                                    //     </a>
+                                    //     <a className="dark:text-white text-black  border border-Bcolor rounded" href={product.serverURL} target="_blank" rel="noopener noreferrer">
+                                    //         ServerCode<FontAwesomeIcon icon={faServer} className="w-10 link link-accent" />
+                                    //     </a>
+                                    //     <a className="dark:text-white text-black border border-Bcolor rounded" href={product.demoURL} target="_blank" rel="noopener noreferrer">
+                                    //         DEMO<FontAwesomeIcon icon={faLink} className="w-10 link link-accent" />
+                                    //     </a>
+                                    // </div>
+//                                 </div>
+//                             </div>

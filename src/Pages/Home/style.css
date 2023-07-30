@@ -83,7 +83,7 @@
 	margin-bottom: 20px;
 }
 
-.logo-div img {
+.logo-div .img {
 	max-width: 100%;
 	/* Make the logo image responsive */
 }
@@ -543,23 +543,19 @@ nav i {
 	border-radius: 50%;
 	cursor: pointer;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 999; /* Ensure the button is above other content */
   }
   
   .scroll-to-top-btn i {
 	font-size: 24px;
   }
   
-  #menuBar {
+  /* #menuBar {
 	position: relative;
-	padding: 20px;
-	background-color: #f9f9f9;
-	border-bottom: 1px solid #ddd;
-  }
-
-
-
-
-
+  } */
 
 
   .left-link {
@@ -578,3 +574,149 @@ nav i {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Category Title Styles */
+.category-title {
+	font-size: 28px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	cursor: pointer;
+  }
+  
+  /* Collapsed Category Title Style */
+  .category-title.collapsed {
+	/* Add any specific style for the collapsed state */
+  }
+  
+  /* Skills Grid */
+  .skills {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 20px;
+  }
+  
+  /* Individual Skill Box */
+  .skill {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	background-color: #2d2c2ba6;
+	transition: transform 0.2s ease-in-out;
+  }
+  
+  /* Skill Image */
+  .skill .img {
+	width: 100px;
+	height: 100px;
+	object-fit: contain;
+  }
+  
+  /* Skill Name */
+  .skill p {
+	margin-top: 10px;
+	font-weight: bold;
+	color: whitesmoke;
+  }
+  
+  /* Skill Hover Effect */
+  .skill:hover {
+	transform: scale(1.05);
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+	.skills {
+	  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	}
+  
+	.skill .img {
+	  width: 80px;
+	  height: 80px;
+	}
+  
+	.skill p {
+	  font-size: 14px;
+	}
+  }
+  
+  /* Advanced Styling - Customizing Colors */
+  .skills {
+	background-color: #2d2c2ba6;
+	padding: 30px;
+	border-radius: 10px;
+  }
+  
+  .category-title {
+	margin-bottom: 30px;
+  }
+  
+  .skill {
+	background-color: #2d2c2ba6;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .skill:hover {
+	transform: translateY(-5px) scale(1.05);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Adding Box Shadow on Skill Click */
+  .skill:active {
+	transform: translateY(-2px) scale(1);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Centering Skill Text Vertically */
+  .skill p {
+	margin-top: auto;
+  }
+  
+  /* Styling Category Titles */
+  h1.category-title {
+	font-size: 30px;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 20px;
+	border-bottom: 2px solid #ddd;
+	padding-bottom: 10px;
+  }
+  
+  /* Adding a Little Space Between Categories */
+  .category + .category {
+	margin-top: 40px;
+  }
+  
+  /* Collapsed Skills */
+  .skills.collapsed {
+	display: none;
+  }
+
+
+
+
+
+
+
+  

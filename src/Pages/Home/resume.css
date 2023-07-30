@@ -1,0 +1,43 @@
+.resume {
+    max-width: 992px;
+    margin: 0 auto; /* Center the content horizontally */
+    padding: 20px;
+    background-color: black;
+  }
+  .resume .skills .white-tex{
+    color: whitesmoke;
+  }
+  .heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: white; /* Text color: White */
+  }
+  
+  .contact-info, .objective, .education, .skills, .projects, .additional-info, .references {
+    margin-bottom: 15px;
+  }
+  
+  .projects h3, .additional-info h2, .references h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: white; /* Text color: White */
+  }
+  
+  .projects ul, .additional-info ul, .references p {
+    font-size: 16px;
+    margin: 0;
+    padding-left: 20px;
+    color: white; /* Text color: White */
+  }
+  
+  .projects li, .additional-info li {
+    list-style: disc;
+  }
+  
+  /* Additional styles to set white text color for all other elements */
+  .resume p {
+    color: white;
+  }
+  

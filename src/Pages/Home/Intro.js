@@ -16,6 +16,7 @@ const Intro = () => {
     const [filesList, setFilesList] = useState([]);
     const [errorMsg, setErrorMsg] = useState('');
     const [isLoading, setIsLoading] = useState(true); // Initialize loading to true
+    // const text = 'Welcome to my portfolio!';
 
     useEffect(() => {
         const getFilesList = async () => {
@@ -59,60 +60,70 @@ const Intro = () => {
     const singleFile = filesList.length > 0 ? filesList[0] : null;
 
     const { text } = useTypewriter({
-        words: ['Developer', 'Designer', 'Programmer'],
+        words: ['Skilled', 'Innovative', 'Tech-savvy', 'Detail-oriented', 'Creative', 'Analytical', 'Adaptable', 'Efficient', 'Collaborative', 'Versatile'],
         loop: {},
         typeSpeed: 120,
         deleteSpeed: 80,
     });
     return (
         <Theme>
-            <div id='intro'>
-                <div class="centered-div">
-                    <div class="intro-content">
-                        <div class=" content-div">
-                            <div>
-                                <h3 className='text-5xl  mb-2 dark:text-white text-black'>Hello</h3>
-                                <p className='text-2xl dark:text-white text-black'>i'am <span className='text-Bcolor '>Robius-sani</span> Mern-Stack Developer</p>
-                                <p className='text-2xl -mt-3 dark:text-white text-black'>Devoted, innovative, Educational, Hardworking</p>
-                            </div>
-                            <div className='flex justify-start items-center sm -ml-3'>
-                                <a className='text-3xl mr-5 dark:text-white text-black link-accent' href="https://github.com/Raju1-Ahmed" target="_blank"><FontAwesomeIcon className='p-3 dark:bg-black rounded-full bg-white' icon={faGithub}></FontAwesomeIcon> </a>
-                                <a className='text-3xl mr-5 dark:text-white text-black link-accent' href="https://github.com/Raju1-Ahmed" target="_blank"><FontAwesomeIcon className='p-3 dark:bg-black rounded-full bg-white' icon={faFacebook}></FontAwesomeIcon> </a>
-                                <a className='text-3xl mr-5 dark:text-white text-black link-accent' href="https://github.com/Raju1-Ahmed" target="_blank"><FontAwesomeIcon className='p-3 dark:bg-black rounded-full bg-white' icon={faLinkedin}></FontAwesomeIcon> </a>
-                                <a className='text-3xl dark:text-white text-black link-accent' href="https://github.com/Raju1-Ahmed" target="_blank"><FontAwesomeIcon className='p-3 dark:bg-black rounded-full bg-white' icon={faGoogle}></FontAwesomeIcon> </a>
-
-                            </div>
-                            <div className='flex justify-around items-center mt-4 -ml-8 button'>
-                                {/* <a className='A text-xl button-85 dark:text-Bcolor border  rounded p-1 link-accent' href="https://github.com/Raju1-Ahmed" target="_blank">DOWNLOAD CV<FontAwesomeIcon className='ml-2' icon={faDownload}></FontAwesomeIcon> </a> */}
-
-
-                                <div>
-                                    {isLoading ? (
-                                        // Loading spinner using Tailwind CSS
-                                        <div className="flex justify-center items-center h-20">
-                                            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-blue-500"></div>
-                                        </div>
-                                    ) : singleFile ? (
-                                        <button className='A md:text-xl text-sm button-85 dark:text-Bcolor border  rounded p-1 link-accent' onClick={() => downloadFile(singleFile._id, singleFile.filePath, singleFile.file_mimetype)}>
-                                            DOWNLOAD CV <FontAwesomeIcon className='ml-2' icon={faDownload}/>
-                                        </button> 
-                                    ) : (
-                                        <p style={{ fontWeight: '300' }}>No files found. Please add some.</p>
-                                    )}
+            <div className="container mx-auto flex flex-col md:flex-row md:gap-4 items-center justify-start">
+                <div className="flex flex-col items-start justify-start text-start md:w-1/2 p-10">
+                    <div>
+                        <h3 className="text-5xl mb-2 text-gray-800 dark:text-gray-100 font-bold">Hello, I'm Robiul-Hasan</h3>
+                        <p className="text-2xl -mt-2 text-gray-800 dark:text-gray-100">A Passionate Mern-Stack Developer</p>
+                        <p className="text-2xl -mt-3 text-gray-800 dark:text-gray-100">Skilled, Innovative, and Always Learning</p>
+                    </div>
+                    <div className="flex justify-start items-center  mt-4 space-x-4">
+                        <a className="text-3xl text-white link-accent" href="https://github.com/Raju1-Ahmed" target="_blank">
+                            <FontAwesomeIcon className="p-3 rounded-full bg-blue-600 hover:bg-blue-700 transition duration-300" icon={faGithub} />
+                        </a>
+                        <a className="text-3xl text-white link-accent" href="https://github.com/Raju1-Ahmed" target="_blank">
+                            <FontAwesomeIcon className="p-3 rounded-full bg-blue-600 hover:bg-blue-700 transition duration-300" icon={faFacebook} />
+                        </a>
+                        <a className="text-3xl text-white link-accent" href="https://github.com/Raju1-Ahmed" target="_blank">
+                            <FontAwesomeIcon className="p-3 rounded-full bg-blue-600 hover:bg-blue-700 transition duration-300" icon={faLinkedin} />
+                        </a>
+                        <a className="text-3xl text-white link-accent" href="https://github.com/Raju1-Ahmed" target="_blank">
+                            <FontAwesomeIcon className="p-3 rounded-full bg-blue-600 hover:bg-blue-700 transition duration-300" icon={faGoogle} />
+                        </a>
+                    </div>
+                    <div className="flex justify-start items-center mt-4 space-x-4">
+                        <div>
+                            {isLoading ? (
+                                // Loading spinner using Tailwind CSS
+                                <div className="flex justify-center items-center h-20">
+                                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-blue-500"></div>
                                 </div>
-                                <a className='B text-xl  button-86 dark:text-Bcolor border  rounded p-3 link-accent' href="https://github.com/Raju1-Ahmed" target="_blank">CONTRACT<FontAwesomeIcon className='ml-2' icon={faFileContract}></FontAwesomeIcon> </a>
-                            </div>
+                            ) : singleFile ? (
+                                <button
+                                    className="A md:text-xl text-sm button-85 text-white border rounded p-1 bg-blue-600 hover:bg-blue-700 transition duration-300"
+                                    onClick={() => downloadFile(singleFile._id, singleFile.filePath, singleFile.file_mimetype)}
+                                >
+                                    Get CV <FontAwesomeIcon className="ml-2" icon={faDownload} />
+                                </button>
+                            ) : (
+                                <p className="text-gray-800 dark:text-gray-100" style={{ fontWeight: '300' }}>NetWork Problem Page Load again</p>
+                            )}
                         </div>
-                        <div className=" logo-div">
-                            <h1 style={{ margin: '0px' }} className="text-black dark:text-white text-3xl font-serif">
-                                i'am a|
-                                <span className='text-xl mb-2 text-Bcolor'>
-                                    {text}
-                                </span>
-                                <Cursor cursorStyle='<' />
-                            </h1>
+                        <div>
+                            <a className="B text-xl button-86 text-white border rounded p-3 bg-blue-600 hover:bg-blue-700 transition duration-300" href="https://github.com/Raju1-Ahmed" target="_blank">
+                                CONTRACT <FontAwesomeIcon className="ml-2" icon={faFileContract} />
+                            </a>
                         </div>
                     </div>
+                </div>
+                <div className="md:w-1/2 p-10">
+                    <p className="text-lg text-gray-800 dark:text-gray-100 leading-relaxed">
+                        Welcome to my portfolio! I am a highly skilled and passionate Mern-Stack Developer with a track record of creating robust and innovative web applications. With over 8 years of experience, I have gained expertise in all stages of the development cycle for dynamic web projects. My technical skills include advanced HTML5, CSS3, JavaScript, jQuery, and Angular JS.
+                    </p>
+                    <br />
+                    <span className="text-4xl mb-2 text-blue-600">
+                        {text}
+                    </span>
+                    <span className="text-6xl text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
+                        &lt;
+                    </span>
                 </div>
             </div>
         </Theme>

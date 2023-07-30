@@ -4,64 +4,52 @@ import { MdCastForEducation, MdDiversity2 } from "react-icons/md";
 const About = () => {
     return (
         <div id='about' className='container m-auto mt-[100px] sm:p-0 p-2'>
-            <div >
-                <h1 class="text-left text-4xl font-bold text-Bcolor ">Programming Carer</h1>
-                <div className='grid lg:grid-cols-2 xl:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 grid-cols-1 justify-items-center mt-16 gap-16'>
-                    <div className='relative'>
-                        <div className='top-0 left-0 mr-3 mb-3 absolute'
-                            style={{ marginleft: "0px", marginTop: "-40px" }} >
-                            <GiStabbedNote className="text-Bcolor text-5xl" />
+            <div className="py-8 px-4">
+                <h1 className="text-5xl  text-gray-800 dark:text-gray-100 font-bold">Programming Career And Experience</h1>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+                    <div className="bg-metal p-6 rounded-lg shadow-lg">
+                        <div className="flex items-center mb-4">
+                            <GiStabbedNote className="text-Bcolor text-5xl mr-2" />
+                            <h2 className="text-Bcolor font-bold text-2xl">Coding Experience</h2>
                         </div>
-                        <div className='dark:bg-white bg-black p-4'>
-                            <span className='flex mt-2 items-center'>
-                                <h2 className="text-Bcolor font-bold text-2xl text-left">Carer Starting</h2>
-                                <GiInspiration className="dark:text-black text-white ml-2 text-3xl" />
-                            </span>
-                            <p className='dark:text-black text-left text-sm font-bold mt-2 text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis harum molestiae laboriosam dignissimos quis est eligendi excepturi distinctio, consectetur vero laborum possimus eos quia sint architecto nesciunt veniam! Praesentium, a!</p></div>
+                        <p className="dark:text-white text-black text-base">
+                            I am a web developer with MERN-Stack technology skills. During college life, I have worked on many projects with my team. I have also completed a four-year diploma in computer programming and a six-month internship with several client projects.
+                        </p>
                     </div>
 
-                    <div className='relative '>
-                        <div className='top-0 left-0 mr-3 mb-3 absolute'
-                            style={{ marginleft: "0px", marginTop: "-40px" }} >
-                            <GiStabbedNote className="text-Bcolor text-5xl" />
+                    <div className="bg-metal p-6 rounded-lg shadow-lg">
+                        <div className="flex items-center mb-4">
+                            <MdCastForEducation   className="text-Bcolor text-5xl mr-2" />
+                            <h2 className="text-Bcolor font-bold text-2xl">Course Complete</h2>
                         </div>
-                        <div className='dark:bg-white bg-black p-4'>
-                            <span className='flex mt-2 items-center'>
-                                <h2 className="text-Bcolor font-bold text-2xl text-left">Educational Background</h2>
-                                <MdCastForEducation className="dark:text-black text-white ml-2 text-3xl" />
-                            </span>
-                            <p className='dark:text-black text-left text-sm font-bold mt-2 text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis harum molestiae laboriosam dignissimos quis est eligendi excepturi distinctio, consectetur vero laborum possimus eos quia sint architecto nesciunt veniam! Praesentium, a!</p></div>
+                        <p className="dark:text-white text-black text-base">
+                        At the end of 2018, I completed web design course from ITBari institute and in 2020 completed web development course with Mern-Stack technology skills from Programming Hero institute. Meanwhile I am studying computer department                        </p>
+                    </div>
+                    
+                    
+                    <div className="bg-metal p-6 rounded-lg shadow-lg">
+                        <div className="flex items-center mb-4">
+                            <MdDiversity2    className="text-Bcolor text-5xl mr-2" />
+                            <h2 className="text-Bcolor font-bold text-2xl">Educational Journey</h2>
+                        </div>
+                        <p className="dark:text-white text-black text-base">
+                        Bachelor's Degree The foundation of The educational qualification is a 4-year Bachelor's degree program in Computer Engineering.
+                                During this program, i am study subjects like digital logic, computer architecture, programming languages, software engineering, data structures, algorithms, computer networks, and electronics                         </p>
                     </div>
 
-                    <div className='relative '>
-                        <div className='top-0 left-0 mr-3 mb-3 absolute'
-                            style={{ marginleft: "0px", marginTop: "-40px" }} >
-                            <GiStabbedNote className="text-Bcolor text-5xl" />
-                        </div>
-                        <div className='dark:bg-white bg-black p-4'>
-                            <span className='flex mt-2 items-center'>
-                                <h2 className="text-Bcolor font-bold text-2xl text-left">University With Programming Carer </h2>
-                                <MdDiversity2 className="dark:text-black text-white ml-2 text-3xl" />
-                            </span>
-                            <p className='dark:text-black text-left text-sm font-bold mt-2 text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis harum molestiae laboriosam dignissimos quis est eligendi excepturi distinctio, consectetur vero laborum possimus eos quia sint architecto nesciunt veniam! Praesentium, a!</p></div>
-                    </div>
 
-                    <div className='relative '>
-                        <div className='top-0 left-0 mr-3 mb-3 absolute'
-                            style={{ marginleft: "0px", marginTop: "-40px" }} >
-                            <GiStabbedNote className="text-Bcolor text-5xl" />
+                    <div className="bg-metal p-6 rounded-lg shadow-lg">
+                        <div className="flex items-center mb-4">
+                            <GiBurningPassion className="text-Bcolor text-5xl mr-2" />
+                            <h2 className="text-Bcolor font-bold text-2xl">Why Coding is My Passion</h2>
                         </div>
-                        <div className='dark:bg-white bg-black p-4 shadow-5xl shadow-Bcolor rounded'>
-                            <span className='flex mt-2 items-center'>
-                                <h2 className="text-Bcolor font-bold text-2xl text-left">Why Now Carer is My Passion</h2>
-                                <GiBurningPassion className="dark:text-black text-white ml-2 text-3xl" />
-                            </span>
-                            <p className='dark:text-black text-white text-left text-sm font-bold mt-2 '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis harum molestiae laboriosam dignissimos quis est eligendi excepturi distinctio, consectetur vero laborum possimus eos quia sint architecto nesciunt veniam! Praesentium, a!</p></div>
+                        <p className="dark:text-white text-black text-base">
+                            Career Opportunities: With the increasing demand for technology professionals, coding can open up a wide range of career opportunities in various industries. Having a skill that is in high demand can be very motivating.
+                        </p>
                     </div>
-
                 </div>
-
             </div>
+
         </div>
     );
 };

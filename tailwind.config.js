@@ -6,12 +6,12 @@ module.exports = {
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
-        'white': '#ffffff',
+        'white': '#DDE7DE',
         'purple': '#3f3cbb',
         'midnight': '#121063',
-        'metal': '#565584',
+        'metal': '#1e202175',
         'tahiti': '#3ab7bf',
-        'silver': '#ecebff',
+        'silver': '#2d2c2ba6',
         'bgMenu': '#504D1A',
         'Bcolor': 'turquoise',
       },
@@ -19,7 +19,7 @@ module.exports = {
         sans: [ 'cursive']
       },
       backgroundColor: {
-        'dark': '#282828',
+        'dark': '#070707',
       },
     },
   },

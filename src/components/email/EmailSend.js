@@ -41,84 +41,91 @@ function EmailSend() {
   return (
     <div>
       <ToastContainer position="bottom-center" limit={1} />
-      <div className="dark:bg-black bg-white flex justify-center items-center gap-2" >
-        <div className=" w-2/4 h-[500px]  bg-teal-700 mx-auto rounded shadow-orange-400">
-          <form className='emailForm' onSubmit={submitHandler}>
-            <h1>Send Email</h1>
-            <div>
-              <label for="email">Email</label>
-              <input
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                id="email"
-              ></input>
-            </div>
-            <div>
-              <label for="subject">Subject</label>
-              <input
-                type="text"
-                id="subject"
-                onChange={(e) => setSubject(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label for="message">Message</label>
-              <textarea
-                id="message"
-                onChange={(e) => setMessage(e.target.value)}
-              ></textarea>
-            </div>
-            <div>
-              <label></label>
-              <button disabled={loading} type="submit">
-                {loading ? 'Sending...' : 'Submit'}
-              </button>
-            </div>
-          </form>
-        </div>
-        <div className="socialLink w-1/3 h-[200px] bg-teal-800 mx-auto rounded shadow-orange-400 grid grid-cols-2 place-items-center items-center justify-items-center py-2 gap-3">
-          <li>
-            <FontAwesomeIcon icon={faInstagram} class="icon link-accent" />
-            <a class="link link-accent" href="">Instagram</a>
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faTwitter} class="icon link-accent" />
-            <a class="link link-accent" href="">Twitter</a>
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faFacebook} class="icon link-accent" />
-            <a class="link link-accent" href="">Facebook</a>
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faLinkedin} class="icon link-accent" />
-            <a class="link link-accent" href="">Linkedin</a>
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faGithub} class="icon link-accent" />
-            <a class="link link-accent" href="">GitHub</a>
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faPhone} class="icon link-accent" />
-            <a class="link link-accent" href="">+88 01733624622</a>
-          </li>
-        </div>
-
+      <div className="min-h-screen py-8 px-4 flex flex-col items-center justify-around md:flex-row md:justify-center">
+      <div className="email-div-bg md:mr-4 md:w-[400px] rounded-lg shadow-lg p-6">
+        <form className="emailForm" onSubmit={submitHandler}>
+          <h1 className="text-3xl font-bold text-white mb-4">Send Email</h1>
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-sm font-bold text-gray-300">Email</label>
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              id="email"
+              className="mt-1 block w-full rounded-md bg-white border border-gray-300 focus:ring focus:ring-blue-200 transition duration-300 ease-in-out text-gray-800"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="subject" className="block text-sm font-bold text-gray-300">Subject</label>
+            <input
+              type="text"
+              id="subject"
+              onChange={(e) => setSubject(e.target.value)}
+              className="mt-1 block w-full rounded-md bg-white border border-gray-300 focus:ring focus:ring-blue-200 transition duration-300 ease-in-out text-gray-800"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="message" className="block text-sm font-bold text-gray-300">Message</label>
+            <textarea
+              id="message"
+              onChange={(e) => setMessage(e.target.value)}
+              className="mt-1 block w-full rounded-md bg-white border border-gray-300 focus:ring focus:ring-blue-200 transition duration-300 ease-in-out text-gray-800"
+              required
+            />
+          </div>
+          <div>
+            <button
+              disabled={loading}
+              type="submit"
+              className={`w-full bg-blue-500 text-white px-4 py-2 rounded-md transition duration-300 ease-in-out hover:bg-blue-600 ${loading ? 'opacity-70 cursor-wait' : ''}`}
+            >
+              {loading ? 'Sending...' : 'Submit'}
+            </button>
+          </div>
+        </form>
       </div>
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      <div className="socialLink email-wrap-bg mt-4 md:mt-0 md:w-[400px] rounded-lg shadow-lg flex flex-wrap justify-center items-center gap-3 p-4">
+        <li>
+          <a href="#" className="text-2xl text-blue-600 transition duration-300 ease-in-out transform hover:scale-110">
+            <FontAwesomeIcon icon={faInstagram} />
+            <span className="ml-2">Instagram</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" className="text-2xl text-blue-400 transition duration-300 ease-in-out transform hover:scale-110">
+            <FontAwesomeIcon icon={faTwitter} />
+            <span className="ml-2">Twitter</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" className="text-2xl text-blue-800 transition duration-300 ease-in-out transform hover:scale-110">
+            <FontAwesomeIcon icon={faFacebook} />
+            <span className="ml-2">Facebook</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" className="text-2xl text-blue-500 transition duration-300 ease-in-out transform hover:scale-110">
+            <FontAwesomeIcon icon={faLinkedin} />
+            <span className="ml-2">LinkedIn</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" className="text-2xl text-gray-800 transition duration-300 ease-in-out transform hover:scale-110">
+            <FontAwesomeIcon icon={faGithub} />
+            <span className="ml-2">GitHub</span>
+          </a>
+        </li>
+        <li>
+          <a href="tel:+8801733624622" className="text-2xl text-green-600 transition duration-300 ease-in-out transform hover:scale-110">
+            <FontAwesomeIcon icon={faPhone} />
+            <span className="ml-2">+88 01733624622</span>
+          </a>
+        </li>
+      </div>
+    </div>
+  );
       <br />
       <br />
     </div>

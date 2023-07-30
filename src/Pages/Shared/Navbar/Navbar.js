@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { FaEllo, FaRegAddressCard, FaFileContract } from "react-icons/fa";
 import { MdDarkMode } from "react-icons/md";
-import { GrProjects } from "react-icons/gr";
+import { GoProject } from "react-icons/go";
 import { GiSkills } from "react-icons/gi";
+import { RxResume } from "react-icons/rx";
 import { Link } from 'react-router-dom';
 import logo from '../../../asset/logo/raju.png'
 import '../../Home/style.css'
@@ -56,23 +57,26 @@ const Navbar = () => {
               <li><a>Item 3</a></li> */}
               <li><a className='dark:text-black text-white font-bold text-lg' href="#intro"><FaEllo className='dark:text-black text-white  font-bold text-lg' />Intro</a></li>
               <li><a className='dark:text-black text-white font-bold text-lg' href="#about">  <FaRegAddressCard className='dark:text-black text-white font-bold text-lg mr-1' />About</a></li>
-              <li><a className='dark:text-black text-white font-bold text-lg' href="#portfolio"> <GrProjects className='dark:text-black text-white font-bold text-lg mr-1' />PORTFOLIO</a> </li>
+              <li><a className='dark:text-black text-white font-bold text-lg' href="#portfolio"> <GoProject className='dark:text-black text-white font-bold text-lg mr-1' />PORTFOLIO</a> </li>
               <li><a className='dark:text-black text-white font-bold text-lg' href="#skill"> <GiSkills className='dark:text-black text-white font-bold text-lg mr-1' /> SKILL</a></li>
+              <li> <a className='dark:text-black text-white font-bold text-lg' href=""> <RxResume className='dark:text-black text-white font-bold text-lg ' /><Link to="/resume"> RESUME</Link></a></li>
               <li><a className='dark:text-black text-white font-bold text-lg' href="#contract"> <FaFileContract className='dark:text-black text-white font-bold text-lg mr-1' />CONTRACT</a></li>
             </ul>
           </div>
           {/* <a class="btn btn-ghost normal-case text-xl">daisyUI</a> */}
-          <a href='#home' class="normal-case text-xl">
-            <h2 className="dark:text-black text-white font-bold text-lg">Robiul Hasan Razu</h2>
+          <Link to='/' class="normal-case text-xl">
+            <h2 className="dark:text-black text-white font-bold text-lg">Razu..</h2>
             {/* <img class='w-6' src={logo} alt="" />  */}
-          </a>
+          </Link>
         </div>
         <div class="navbar-center hidden lg:flex">
           <ul class="menu menu-horizontal px-1">
             <li><a className='dark:text-black text-white font-bold text-lg' href="#intro"><FaEllo className='dark:text-black text-white  font-bold text-lg' />Intro</a></li>
             <li><a className='dark:text-black text-white font-bold text-lg' href="#about">  <FaRegAddressCard className='dark:text-black text-white font-bold text-lg ' />About</a></li>
-            <li><a className='dark:text-black text-white font-bold text-lg' href="#portfolio"> <GrProjects className='dark:text-black text-white font-bold text-lg' />PORTFOLIO</a> </li>
-            <li><a className='dark:text-black text-white font-bold text-lg' href="#skill"> <GiSkills className='dark:text-black text-white font-bold text-lg ' /> SKILL</a></li>
+            <li><a className='dark:text-black text-white font-bold text-lg' href="#portfolio"> <GoProject className='dark:text-black text-white font-bold text-lg' />PORTFOLIO</a> </li>
+            <li><a className='dark:text-black text-white font-bold text-lg' href="#resume"> <GiSkills className='dark:text-black text-white font-bold text-lg ' /> SKILL</a></li>
+            <li> <a className='dark:text-black text-white font-bold text-lg' href=""> <RxResume className='dark:text-black text-white font-bold text-lg ' /><Link to="/resume"> RESUME</Link></a></li>
+            {/* <Link to="/resume"><GiSkills className='dark:text-black text-white font-bold text-lg mr-1' /> RESUME</Link> */}
             <li><a className='dark:text-black text-white font-bold text-lg' href="#contract"> <FaFileContract className='dark:text-black text-white font-bold text-lg ' />CONTRACT</a></li>
             {/* <li tabindex="0">
               <details>
