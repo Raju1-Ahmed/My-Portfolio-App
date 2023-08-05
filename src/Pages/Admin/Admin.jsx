@@ -7,6 +7,7 @@ import ProductUpload from './ProductUpload';
 import FontendList from '../../components/FontendList';
 import ProductDelete from './ProductDelete';
 import ProjectCategory from '../category/ProjectCategory';
+import ClientEmail from './ClientEmail';
 
 const Admin = () => {
   const [filesList, setFilesList] = useState([]);
@@ -248,6 +249,8 @@ const Admin = () => {
       <br />
 
               {/* <ProjectCategory/> */}
+
+              <ClientEmail/>
 
       <br />
       <br />

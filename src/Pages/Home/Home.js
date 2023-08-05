@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import About from './About';
-import Contract from './Contract';
 import Intro from './Intro';
-import Portfolio from './Portfolio';
 import Skills from './Skills';
 import ProjectCategory from '../category/ProjectCategory';
 import EmailSend from '../../components/email/EmailSend';
@@ -44,11 +42,8 @@ const Home = () => {
             <Intro></Intro>
             <About></About>
             <ProjectCategory />
-            {/* <Portfolio></Portfolio>  */}
             <Skills></Skills> 
             <EmailSend />
-            {/* <Contract></Contract>  */}
-
             <>
                 {showButton && (
                     <div className="scroll-to-top-btn" onClick={handleScrollToTop}>

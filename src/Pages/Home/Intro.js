@@ -78,13 +78,13 @@ const Intro = () => {
                         <a className="text-3xl text-white link-accent" href="https://github.com/Raju1-Ahmed" target="_blank">
                             <FontAwesomeIcon className="p-3 rounded-full bg-blue-600 hover:bg-blue-700 transition duration-300" icon={faGithub} />
                         </a>
-                        <a className="text-3xl text-white link-accent" href="https://github.com/Raju1-Ahmed" target="_blank">
+                        <a className="text-3xl text-white link-accent" href="https://www.facebook.com/profile.php?id=100072162730034" target="_blank">
                             <FontAwesomeIcon className="p-3 rounded-full bg-blue-600 hover:bg-blue-700 transition duration-300" icon={faFacebook} />
                         </a>
-                        <a className="text-3xl text-white link-accent" href="https://github.com/Raju1-Ahmed" target="_blank">
+                        <a className="text-3xl text-white link-accent" href="https://www.linkedin.com/in/robius-sani-raju-2944a2240/" target="_blank">
                             <FontAwesomeIcon className="p-3 rounded-full bg-blue-600 hover:bg-blue-700 transition duration-300" icon={faLinkedin} />
                         </a>
-                        <a className="text-3xl text-white link-accent" href="https://github.com/Raju1-Ahmed" target="_blank">
+                        <a className="text-3xl text-white link-accent" href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox/FMfcgzGtwMkDMkWQzCmPrfNKrrWkWVjs?compose=DmwnWrRttgKQtVCgQwXDcXKQcfJzmJJwZvdZFtfdPtljGlCcrLzQrgkzPhfqTVgwvrCxzcPtdhFq" target="_blank">
                             <FontAwesomeIcon className="p-3 rounded-full bg-blue-600 hover:bg-blue-700 transition duration-300" icon={faGoogle} />
                         </a>
                     </div>
@@ -103,11 +103,11 @@ const Intro = () => {
                                     Get CV <FontAwesomeIcon className="ml-2" icon={faDownload} />
                                 </button>
                             ) : (
-                                <p className="text-gray-800 dark:text-gray-100" style={{ fontWeight: '300' }}>NetWork Problem Page Load again</p>
+                                <p className="text-red-600" style={{ fontWeight: '300' }}>Network issue Page load Again</p>
                             )}
                         </div>
                         <div>
-                            <a className="B text-xl button-86 text-white border rounded p-3 bg-blue-600 hover:bg-blue-700 transition duration-300" href="https://github.com/Raju1-Ahmed" target="_blank">
+                            <a className="B text-xl button-86 text-white border rounded p-3 bg-blue-600 hover:bg-blue-700 transition duration-300" href="#contract">
                                 CONTRACT <FontAwesomeIcon className="ml-2" icon={faFileContract} />
                             </a>
                         </div>

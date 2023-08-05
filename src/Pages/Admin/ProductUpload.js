@@ -86,7 +86,7 @@ const ProductUpload = () => {
           <input type="text" name="name" value={productData.name} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>Description:</label>
+          <label>Description: <p className="text-sm ">Total characters: 538 to 545 for standard</p> </label>
           <input type="text" name="description" value={productData.description} onChange={handleChange} />
         </div>
         <div className="form-group">

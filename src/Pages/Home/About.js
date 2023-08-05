@@ -3,7 +3,7 @@ import { GiStabbedNote, GiInspiration, GiBurningPassion } from "react-icons/gi";
 import { MdCastForEducation, MdDiversity2 } from "react-icons/md";
 const About = () => {
     return (
-        <div id='about' className='container m-auto mt-[100px] sm:p-0 p-2'>
+        <div id='about' className='container m-auto mt-0 sm:mt-[100px] sm:p-0 p-2'>
             <div className="py-8 px-4">
                 <h1 className="text-5xl  text-gray-800 dark:text-gray-100 font-bold">Programming Career And Experience</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
