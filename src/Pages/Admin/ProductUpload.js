@@ -16,6 +16,10 @@ const ProductUpload = () => {
     futureField: 'FullStack', // Default value is FullStack
   });
 
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setProductData((prevData) => ({
@@ -42,6 +46,13 @@ const ProductUpload = () => {
       });
 
       const cloudinaryData = await cloudinaryResponse.json();
+
+       // Simulate upload progress (replace this with actual upload progress)
+       for (let progress = 0; progress <= 100; progress += 10) {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        setUploadProgress(progress);
+      }
+
       return cloudinaryData.secure_url;
     } catch (error) {
       console.error('Error uploading video:', error);
@@ -72,7 +83,8 @@ const ProductUpload = () => {
 
       await axios.post(`${API_URL}/product`, productDetails);
 
-      console.log('Product created successfully!');
+      setIsModalOpen(true);
+      console.log('Product created successfully!');      
     } catch (error) {
       console.error('Error creating product:', error);
     }
@@ -118,6 +130,35 @@ const ProductUpload = () => {
             <option value="Static">Static</option>
           </select>
         </div>
+
+   {/* Progress bar */}
+   {uploadProgress < 100 && (
+          <div className="w-full px-4 lg:w-5/12">
+            <div className="mb-4">
+              <div className="relative h-2 w-full bg-gray-300 rounded-full">
+                <div
+                  className="absolute h-2 bg-primary rounded-full"
+                  style={{ width: `${uploadProgress}%` }}
+                ></div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* After insertion modal */}
+        {isModalOpen && (
+          <div className="fixed inset-0 flex items-center justify-center">
+            <div className="modal">
+              <div className="modal-box">
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={() => setIsModalOpen(false)}>✕</button>
+                <h3 className="font-bold text-lg">Data Inserted!</h3>
+                <p className="py-4">Press ESC key or click on ✕ button to close</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+
         <button type="submit" className="submit-button">Create Product</button>
       </form>
       <br/>

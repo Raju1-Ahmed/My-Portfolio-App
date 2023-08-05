@@ -6,7 +6,7 @@ const ClientEmail = () => {
     const [emails, setEmails] = useState([]);
 
     const fetchEmails = () => {
-      axios.get('http://localhost:8080/api/v1/file/email')
+      axios.get('https://myportfolioserver-0ekq.onrender.com/api/v1/file/email')
         .then((res) => {
           setEmails(res.data);
         })

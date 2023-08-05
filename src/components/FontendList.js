@@ -10,7 +10,7 @@ const FontendList = () => {
 
   const fetchFrontendProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/file/fontend');
+      const response = await axios.get('https://myportfolioserver-0ekq.onrender.com/api/v1/file/fontend');
       setFrontendProducts(response.data);
     } catch (error) {
       console.error('Error fetching frontend products:', error);

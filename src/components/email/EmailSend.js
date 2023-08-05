@@ -29,7 +29,7 @@ function EmailSend() {
     };
 
     // Send form data to the backend for saving in the database
-    axios.post('http://localhost:8080/api/v1/email', formData)
+    axios.post('https://myportfolioserver-0ekq.onrender.com/api/v1/email', formData)
       .then((res) => {
         console.log(res.data);
         setLoading(false);

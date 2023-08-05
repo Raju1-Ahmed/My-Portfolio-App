@@ -19,7 +19,7 @@ const ProjectCategory = () => {
         // Fetch products from the API
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/v1/file/product');
+                const response = await axios.get('https://myportfolioserver-0ekq.onrender.com/api/v1/file/product');
                 setProducts(response.data);
                 setDataLoaded(true);
             } catch (error) {

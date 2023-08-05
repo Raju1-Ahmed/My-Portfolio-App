@@ -75,7 +75,7 @@ const Admin = () => {
     try {
       const formData = new FormData();
       formData.append('pdf', selectedFile); // Ensure that the field name 'pdf' matches the backend field name
-      await axios.post('http://localhost:8080/api/v1/fileUpload/file-upload', formData, {
+      await axios.post('https://myportfolioserver-0ekq.onrender.com/api/v1/fileUpload/file-upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

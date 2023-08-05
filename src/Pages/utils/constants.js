@@ -1,3 +1,3 @@
 // utils/constants.js
 
-export const API_URL = 'http://localhost:8080/api/v1/file/';
+export const API_URL = 'https://myportfolioserver-0ekq.onrender.com/api/v1/file/';
