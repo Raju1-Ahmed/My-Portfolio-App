@@ -6,6 +6,8 @@ import ProjectCategory from '../category/ProjectCategory';
 import EmailSend from '../../components/email/EmailSend';
 
 import './style.css'
+import Navbar from '../Shared/Navbar/Navbar';
+import Footer from '../Shared/Footer/Footer';
 
 const Home = () => {
     const [showButton, setShowButton] = useState(false);
@@ -39,6 +41,7 @@ const Home = () => {
 
     return (
         <div id='home' >
+            <Navbar/>
             <Intro></Intro>
             <About></About>
             <ProjectCategory />
@@ -55,7 +58,7 @@ const Home = () => {
             <div class="left-link">
                 <a href="#">Hire Me</a>
             </div>
-
+ <Footer/>
 
         </div>
     );

@@ -5,6 +5,7 @@ import { FaEllo, FaRegAddressCard, FaFileContract } from "react-icons/fa";
 import { MdDarkMode } from "react-icons/md";
 import { GoProject } from "react-icons/go";
 import { GiSkills } from "react-icons/gi";
+import { RiAdminFill } from "react-icons/ri";
 import { RxResume } from "react-icons/rx";
 import { Link } from 'react-router-dom';
 import logo from '../../../asset/logo/raju.png'
@@ -70,9 +71,7 @@ const Navbar = () => {
         </div>
         <div class="navbar-end">
           <div class="flex space-x-3 justify-center items-center">
-            <a href="https://github.com/Raju1-Ahmed" target="_blank">
-              <FontAwesomeIcon icon={faGithub} className='text-Bcolor font-bold text-2xl mr-1' ></FontAwesomeIcon>
-            </a>
+          <Link className='dark:text-black text-white font-bold text-lg' to="/admin"> <RiAdminFill className='dark:text-black text-white font-bold text-xl ' /></Link>
             <span onClick={handleThemeSwitch}>
               <MdDarkMode className='dark:text-black text-white font-bold text-2xl mr-1' />
             </span>
