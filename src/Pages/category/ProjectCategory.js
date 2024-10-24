@@ -223,7 +223,7 @@ const ProjectCategory = () => {
                         ))}
                     </Slider>
                 </div>
-            )};
+            )}
         </div>
     );
 };

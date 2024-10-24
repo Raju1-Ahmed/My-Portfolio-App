@@ -35,11 +35,10 @@ const Navbar = () => {
   const handleThemeSwitch = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
-  //  The End dark and light mode code code =========================END
+  //  The End dark and light mode code code =========================END YTigasdyi uyegd dg iuyfgf ouyg  f
 
   return (
     <div id="menuBar" className='bg-black dark:bg-white'>
-
       <div class="navbar ">
         <div class="navbar-start">
           <div class="dropdown bg-black dark:bg-white">
