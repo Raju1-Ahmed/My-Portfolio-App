@@ -1,13 +1,11 @@
-// import './App.css';
 import { useState } from 'react';
 import { faFacebook, faGithub, faInstagram, faLinkedin, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
-import { faPhone, faSoccerBall, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import './email.css'
-import { FaGithub } from 'react-icons/fa';
+import { API_ENDPOINTS } from '../../Pages/utils/constants';
+import './email.css';
 
 function EmailSend() {
   const [name, setName] = useState('');
@@ -22,59 +20,74 @@ function EmailSend() {
 
     const formData = {
       name,
-      email,
       subject,
-      desc: message, // Make sure to map 'message' to 'desc'
-      clientEmail: email, // Set 'clientEmail' to the same value as 'email'
+      desc: message,
+      clientEmail: email,
     };
 
-    // Send form data to the backend for saving in the database
-    axios.post('https://myportfolioserver-0ekq.onrender.com/api/v1/email', formData)
-      .then((res) => {
-        console.log(res.data);
+    axios.post(API_ENDPOINTS.messages, formData)
+      .then(() => {
         setLoading(false);
-        // Do something after successful submission, e.g., show a success message
+        setName('');
+        setEmail('');
+        setSubject('');
+        setMessage('');
+        toast.success('Message sent successfully.');
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(() => {
         setLoading(false);
-        // Handle error, e.g., show an error message
+        toast.error('Unable to send message right now.');
       });
   };
+
+  const links = [
+    { href: 'https://www.instagram.com/robiussanirazu/', icon: faInstagram, label: 'Instagram' },
+    { href: 'https://twitter.com/RobiulHasanRazu', icon: faTwitter, label: 'Twitter' },
+    { href: 'https://www.facebook.com/profile.php?id=100072162730034', icon: faFacebook, label: 'Facebook' },
+    { href: 'https://www.linkedin.com/in/robius-sani-raju-2944a2240/', icon: faLinkedin, label: 'LinkedIn' },
+    { href: 'https://github.com/Raju1-Ahmed', icon: faGithub, label: 'GitHub' },
+    { href: 'tel:+8801733624622', icon: faWhatsapp, label: '+88 01733624622' },
+  ];
+
   return (
-    <div id='contract' className="mt-[100px]">
+    <section id='contact' className="section-shell section-block">
       <ToastContainer position="bottom-center" limit={1} />
-      <div className="min-h-screen py-8 px-4 flex flex-col items-center justify-around md:flex-row md:justify-center">
-      <div className="email-div-bg md:mr-14 md:w-[400px] rounded-lg shadow-lg p-6">
-      <form className="emailForm" onSubmit={submitHandler}>
-            <h1 className="text-3xl font-bold text-white mb-4">Send Email</h1>
+      <div className="section-heading">
+        <span className="eyebrow">Contact</span>
+        <h2>Let&apos;s talk about a portfolio site, client work, or a full-stack product idea.</h2>
+        <p>Use the form or any of the direct links. Messages are stored through the backend so they can also be reviewed from the admin dashboard.</p>
+      </div>
+      <div className="contact-grid">
+        <div className="contact-panel">
+          <form className="emailForm" onSubmit={submitHandler}>
+            <h3>Send a message</h3>
             <div className="mb-4">
               <label htmlFor="name" className="block text-sm font-bold text-gray-300">Name</label>
               <input
+                value={name}
                 onChange={(e) => setName(e.target.value)}
-                type="name"
+                type="text"
                 id="name"
-                className="mt-1 block w-full rounded-md bg-white border border-gray-300 focus:ring focus:ring-blue-200 transition duration-300 ease-in-out text-gray-800"
                 required
               />
             </div>
             <div className="mb-4">
               <label htmlFor="email" className="block text-sm font-bold text-gray-300">Email</label>
               <input
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 id="email"
-                className="mt-1 block w-full rounded-md bg-white border border-gray-300 focus:ring focus:ring-blue-200 transition duration-300 ease-in-out text-gray-800"
                 required
               />
             </div>
             <div className="mb-4">
               <label htmlFor="subject" className="block text-sm font-bold text-gray-300">Subject</label>
               <input
+                value={subject}
                 type="text"
                 id="subject"
                 onChange={(e) => setSubject(e.target.value)}
-                className="mt-1 block w-full rounded-md bg-white border border-gray-300 focus:ring focus:ring-blue-200 transition duration-300 ease-in-out text-gray-800"
                 required
               />
             </div>
@@ -82,8 +95,8 @@ function EmailSend() {
               <label htmlFor="message" className="block text-sm font-bold text-gray-300">Message</label>
               <textarea
                 id="message"
+                value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="mt-1 block w-full rounded-md bg-white border border-gray-300 focus:ring focus:ring-blue-200 transition duration-300 ease-in-out text-gray-800"
                 required
               />
             </div>
@@ -91,55 +104,33 @@ function EmailSend() {
               <button
                 disabled={loading}
                 type="submit"
-                className={`w-full bg-blue-500 text-white px-4 py-2 rounded-md transition duration-300 ease-in-out hover:bg-blue-600 ${loading ? 'opacity-70 cursor-wait' : ''}`}
+                className={`w-full ${loading ? 'opacity-70 cursor-wait' : ''}`}
               >
                 {loading ? 'Sending...' : 'Submit'}
               </button>
             </div>
           </form>
-      </div>
+        </div>
 
-      <div className="socialLink email-wrap-bg mt-4 md:mt-0 md:w-[400px] rounded-lg shadow-lg flex flex-wrap justify-center items-center gap-3 p-4">
-        <li>
-          <a href="https://www.instagram.com/robiussanirazu/" className="text-2xl text-blue-600 transition duration-300 ease-in-out transform hover:scale-110">
-            <FontAwesomeIcon icon={faInstagram} />
-            <span className="ml-2">Instagram</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://twitter.com/RobiulHasanRazu" className="text-2xl text-blue-400 transition duration-300 ease-in-out transform hover:scale-110">
-            <FontAwesomeIcon icon={faTwitter} />
-            <span className="ml-2">Twitter</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://www.facebook.com/profile.php?id=100072162730034" className="text-2xl text-blue-800 transition duration-300 ease-in-out transform hover:scale-110">
-            <FontAwesomeIcon icon={faFacebook} />
-            <span className="ml-2">Facebook</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://www.linkedin.com/in/robius-sani-raju-2944a2240/" className="text-2xl text-blue-500 transition duration-300 ease-in-out transform hover:scale-110">
-            <FontAwesomeIcon icon={faLinkedin} />
-            <span className="ml-2">LinkedIn</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/Raju1-Ahmed" className="text-2xl text-gray-800 transition duration-300 ease-in-out transform hover:scale-110">
-            <FontAwesomeIcon icon={faGithub} />
-            <span className="ml-2">GitHub</span>
-          </a>
-        </li>
-        <li>
-          <a href="tel:+8801733624622" className="text-2xl text-green-600 transition duration-300 ease-in-out transform hover:scale-110">
-            <FontAwesomeIcon icon={faWhatsapp} />
-            <span className="ml-2">+88 01733624622</span>
-          </a>
-        </li>
+        <div className="contact-panel contact-panel--links">
+          <h3>Direct links</h3>
+          <ul className="socialLink">
+            {links.map((link) => (
+              <li key={link.label}>
+                <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
+                  <FontAwesomeIcon icon={link.icon} />
+                  <span>{link.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="contact-note">
+            <strong>Best for:</strong>
+            <p>Portfolio redesigns, CRUD dashboards, React interfaces, and Express or Mongo-backed app work.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  );
-    </div>
+    </section>
   );
 }
 
