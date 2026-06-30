@@ -3,10 +3,9 @@ import { useTypewriter } from 'react-simple-typewriter';
 import { faFacebook, faGithub, faGoogle, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faFileContract } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 import download from 'downloadjs';
-import myImage from '../../asset/portfulioImg/removebg.png';
-import { API_ENDPOINTS } from '../utils/constants';
+import myImage from '../../asset/portfulioImg/removebg.jpeg';
+import { apiRequest, getErrorMessage } from '../utils/api';
 import './style.css';
 
 const Intro = () => {
@@ -15,25 +14,35 @@ const Intro = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        let cancelled = false;
+
         const getFilesList = async () => {
             try {
-                const { data } = await axios.get(API_ENDPOINTS.files);
+                const { data } = await apiRequest({ url: '/files' });
+                if (cancelled) return;
                 setErrorMsg('');
                 setFilesList(data);
             } catch (error) {
-                setErrorMsg(error.response?.data || 'Resume unavailable right now');
+                if (cancelled) return;
+                setErrorMsg(getErrorMessage(error, 'Resume unavailable right now'));
             } finally {
+                if (cancelled) return;
                 setIsLoading(false);
             }
         };
 
         getFilesList();
+
+        return () => {
+            cancelled = true;
+        };
     }, []);
 
     const downloadFile = async (_id, filepath, mimetype) => {
         setIsLoading(true);
         try {
-            const result = await axios.get(`${API_ENDPOINTS.files}/${_id}/download`, {
+            const result = await apiRequest({
+                url: `/files/${_id}/download`,
                 responseType: 'blob',
             });
 
@@ -51,6 +60,23 @@ const Intro = () => {
             setIsLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (!isLoading && filesList.length === 0 && errorMsg) {
+            const retryTimer = setTimeout(() => {
+                setIsLoading(true);
+                setErrorMsg('');
+                apiRequest({ url: '/files' })
+                    .then(({ data }) => setFilesList(data))
+                    .catch((error) => setErrorMsg(getErrorMessage(error, 'Resume unavailable right now')))
+                    .finally(() => setIsLoading(false));
+            }, 3000);
+
+            return () => clearTimeout(retryTimer);
+        }
+
+        return undefined;
+    }, [errorMsg, filesList.length, isLoading]);
 
     const singleFile = filesList.length > 0 ? filesList[0] : null;
 
@@ -75,12 +101,15 @@ const Intro = () => {
                         {isLoading ? (
                             <div className="status-pill">Loading resume...</div>
                         ) : singleFile ? (
-                            <button
-                                className="primary-button"
-                                onClick={() => downloadFile(singleFile._id, singleFile.filePath, singleFile.file_mimetype)}
-                            >
-                                Download Resume <FontAwesomeIcon className="ml-2" icon={faDownload} />
-                            </button>
+                            <div className="hero-resume-panel">
+                                <button
+                                    className="primary-button"
+                                    onClick={() => downloadFile(singleFile._id, singleFile.filePath, singleFile.file_mimetype)}
+                                >
+                                    Download Resume <FontAwesomeIcon className="ml-2" icon={faDownload} />
+                                </button>
+                                <span className="hero-resume-meta">{singleFile.filename}</span>
+                            </div>
                         ) : (
                             <span className="status-pill status-pill--error">{errorMsg}</span>
                         )}

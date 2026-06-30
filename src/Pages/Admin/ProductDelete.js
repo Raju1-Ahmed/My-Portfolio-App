@@ -6,10 +6,9 @@ import './productstyle.css';
 const ProductDelete = () => {
   const [products, setProducts] = useState([]);
 
-  // Function to fetch all products from the backend
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(`${API_URL}/product`);
+      const response = await axios.get(`${API_URL}/projects`);
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -20,11 +19,9 @@ const ProductDelete = () => {
     fetchProducts();
   }, []);
 
-  // Function to handle product deletion
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${API_URL}/product/${id}`);
-      // Refresh the list of products after deletion
+      await axios.delete(`${API_URL}/projects/${id}`);
       fetchProducts();
       console.log('Product deleted successfully!');
     } catch (error) {
@@ -39,10 +36,6 @@ const ProductDelete = () => {
         <thead>
           <tr>
             <th>Name</th>
-            {/* <th>Description</th>
-            <th>Demo URL</th>
-            <th>Server URL</th>
-            <th>Client URL</th> */}
             <th>Date</th>
             <th>Actions</th>
           </tr>
@@ -51,10 +44,6 @@ const ProductDelete = () => {
           {products.map((product) => (
             <tr key={product._id}>
               <td>{product.name}</td>
-              {/* <td>{product.description}</td> */}
-              {/* <td>{product.demoURL}</td> */}
-              {/* <td>{product.serverURL}</td> */}
-              {/* <td>{product.clientURL}</td> */}
               <td>{product.date}</td>
               <td>
                 <button onClick={() => handleDelete(product._id)}>Delete</button>

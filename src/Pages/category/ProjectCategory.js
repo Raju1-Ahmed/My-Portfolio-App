@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { faFileCode, faLink, faServer } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { API_ENDPOINTS, PROJECT_CATEGORIES } from '../utils/constants';
+import { PROJECT_CATEGORIES } from '../utils/constants';
+import { apiRequest } from '../utils/api';
 import './ProjectCategory.css';
 
 const ProjectCategory = () => {
@@ -11,19 +11,43 @@ const ProjectCategory = () => {
     const [dataLoaded, setDataLoaded] = useState(false);
 
     useEffect(() => {
+        let cancelled = false;
+
         const fetchProducts = async () => {
             try {
-                const response = await axios.get(API_ENDPOINTS.projects);
+                const response = await apiRequest({ url: '/projects' });
+                if (cancelled) return;
                 setProducts(response.data);
             } catch (error) {
                 console.error('Error fetching products:', error);
             } finally {
+                if (cancelled) return;
                 setDataLoaded(true);
             }
         };
 
         fetchProducts();
+
+        return () => {
+            cancelled = true;
+        };
     }, []);
+
+    useEffect(() => {
+        if (dataLoaded && products.length === 0) {
+            const retryTimer = setTimeout(() => {
+                setDataLoaded(false);
+                apiRequest({ url: '/projects' })
+                    .then((response) => setProducts(response.data))
+                    .catch((error) => console.error('Error fetching products:', error))
+                    .finally(() => setDataLoaded(true));
+            }, 3000);
+
+            return () => clearTimeout(retryTimer);
+        }
+
+        return undefined;
+    }, [dataLoaded, products.length]);
 
     const filteredProducts = products.filter((product) => product.futureField === activeTab);
 

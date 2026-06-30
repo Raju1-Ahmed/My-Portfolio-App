@@ -1,15 +1,41 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import download from 'downloadjs';
-import { API_ENDPOINTS, PROJECT_CATEGORIES } from '../utils/constants';
+import { PROJECT_CATEGORIES } from '../utils/constants';
+import { apiRequest, getErrorMessage } from '../utils/api';
+
+const initialAnalytics = {
+  totals: {
+    totalEvents: 0,
+    pageViews: 0,
+    clicks: 0,
+    sessions: 0,
+    visitors: 0,
+    sessionEnds: 0,
+  },
+  topPages: [],
+  topClicks: [],
+  topSources: [],
+  topCountries: [],
+  sessionDurations: {
+    averageSessionDurationMs: 0,
+    longestSessionDurationMs: 0,
+  },
+  topDevices: [],
+  topBrowsers: [],
+  recentEvents: [],
+};
 
 const Admin = () => {
   const [filesList, setFilesList] = useState([]);
   const [projects, setProjects] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [analytics, setAnalytics] = useState(initialAnalytics);
   const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [isUploadingResume, setIsUploadingResume] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [lastRefreshed, setLastRefreshed] = useState(null);
   const [projectData, setProjectData] = useState({
     name: '',
     description: '',
@@ -22,49 +48,71 @@ const Admin = () => {
   });
 
   const fetchDashboardData = async () => {
+    setIsLoading(true);
     try {
-      const [filesResponse, projectResponse, messageResponse] = await Promise.all([
-        axios.get(API_ENDPOINTS.files),
-        axios.get(API_ENDPOINTS.projects),
-        axios.get(API_ENDPOINTS.messages),
+      const [filesResult, projectsResult, messagesResult] = await Promise.allSettled([
+        apiRequest({ url: '/files' }),
+        apiRequest({ url: '/projects' }),
+        apiRequest({ url: '/messages' }),
       ]);
 
-      setFilesList(filesResponse.data);
-      setProjects(projectResponse.data);
-      setMessages(messageResponse.data);
+      if (filesResult.status === 'fulfilled') setFilesList(filesResult.value.data);
+      if (projectsResult.status === 'fulfilled') setProjects(projectsResult.value.data);
+      if (messagesResult.status === 'fulfilled') setMessages(messagesResult.value.data);
+
       setErrorMsg('');
+      setLastRefreshed(new Date());
     } catch (error) {
-      setErrorMsg(error.response?.data || 'Unable to load admin data.');
+      setErrorMsg(getErrorMessage(error, 'Unable to load admin data.'));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchAnalyticsData = async () => {
+    try {
+      const analyticsResult = await apiRequest({ url: '/analytics/summary' });
+      setAnalytics(analyticsResult.data);
+    } catch (error) {
+      console.error('Unable to load analytics data:', error);
     }
   };
 
   useEffect(() => {
     fetchDashboardData();
+    fetchAnalyticsData();
   }, []);
+
+  const refreshDashboard = async () => {
+    await fetchDashboardData();
+    await fetchAnalyticsData();
+  };
 
   const downloadFile = async (_id, filepath, mimetype) => {
     try {
-      const result = await axios.get(`${API_ENDPOINTS.files}/${_id}/download`, {
-        responseType: 'blob'
+      const result = await apiRequest({
+        url: `/files/${_id}/download`,
+        responseType: 'blob',
       });
 
-      if (!filepath || typeof filepath !== 'string') {
+      const filename = filepath?.split('/').pop();
+      if (!filename) {
         throw new Error('Invalid file path.');
       }
 
-      const split = filepath.split('/');
-      const filename = split[split.length - 1];
       setErrorMsg('');
       return download(result.data, filename, mimetype);
     } catch (error) {
-      setErrorMsg(error.message || 'Error while downloading file. Try again later');
+      setErrorMsg(getErrorMessage(error, 'Error while downloading file. Try again later'));
     }
   };
 
   const handleDeleteResume = async (id) => {
     try {
-      await axios.delete(`${API_ENDPOINTS.files}/${id}`);
+      await apiRequest({ url: `/files/${id}`, method: 'DELETE' });
       setFilesList((prevFiles) => prevFiles.filter((file) => file._id !== id));
+      setSuccessMsg('Resume deleted successfully.');
+      setErrorMsg('');
     } catch (error) {
       setErrorMsg('Error while deleting the file.');
     }
@@ -80,15 +128,18 @@ const Admin = () => {
       setIsUploadingResume(true);
       const formData = new FormData();
       formData.append('pdf', selectedFile);
-      await axios.post(`${API_ENDPOINTS.files}/upload`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      await apiRequest({
+        url: '/files/upload',
+        method: 'POST',
+        data: formData,
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
       setSelectedFile(null);
+      setSuccessMsg('Resume uploaded successfully.');
+      setErrorMsg('');
       await fetchDashboardData();
     } catch (error) {
-      setErrorMsg('Something went wrong during file upload.');
+      setErrorMsg(getErrorMessage(error, 'Something went wrong during file upload.'));
     } finally {
       setIsUploadingResume(false);
     }
@@ -96,17 +147,11 @@ const Admin = () => {
 
   const handleProjectFieldChange = (event) => {
     const { name, value } = event.target;
-    setProjectData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setProjectData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleProjectVideoChange = (event) => {
-    setProjectData((prevData) => ({
-      ...prevData,
-      videoFile: event.target.files[0],
-    }));
+    setProjectData((prevData) => ({ ...prevData, videoFile: event.target.files[0] }));
   };
 
   const uploadVideo = async () => {
@@ -124,7 +169,6 @@ const Admin = () => {
     });
 
     const cloudinaryData = await cloudinaryResponse.json();
-
     if (!cloudinaryData.secure_url) {
       throw new Error('Video upload failed.');
     }
@@ -137,7 +181,6 @@ const Admin = () => {
 
     try {
       const videoURL = await uploadVideo();
-
       const payload = {
         name: projectData.name,
         description: projectData.description,
@@ -153,7 +196,7 @@ const Admin = () => {
         },
       };
 
-      await axios.post(API_ENDPOINTS.projects, payload);
+      await apiRequest({ url: '/projects', method: 'POST', data: payload });
       setProjectData({
         name: '',
         description: '',
@@ -164,16 +207,20 @@ const Admin = () => {
         futureField: 'FullStack',
         videoFile: null,
       });
-      await fetchDashboardData();
+      setSuccessMsg('Project created successfully.');
+      setErrorMsg('');
+      await refreshDashboard();
     } catch (error) {
-      setErrorMsg(error.message || 'Error creating project.');
+      setErrorMsg(getErrorMessage(error, 'Error creating project.'));
     }
   };
 
   const handleDeleteProject = async (id) => {
     try {
-      await axios.delete(`${API_ENDPOINTS.projects}/${id}`);
+      await apiRequest({ url: `/projects/${id}`, method: 'DELETE' });
       setProjects((prev) => prev.filter((project) => project._id !== id));
+      setSuccessMsg('Project deleted successfully.');
+      setErrorMsg('');
     } catch (error) {
       setErrorMsg('Error deleting project.');
     }
@@ -185,31 +232,65 @@ const Admin = () => {
     { label: 'Messages', value: messages.length },
   ];
 
+  const trafficCards = [
+    { label: 'Visitors', value: analytics.totals.visitors },
+    { label: 'Sessions', value: analytics.totals.sessions },
+    { label: 'Page Views', value: analytics.totals.pageViews },
+    { label: 'Clicks', value: analytics.totals.clicks },
+    { label: 'Session Ends', value: analytics.totals.sessionEnds },
+    {
+      label: 'Avg Visit',
+      value: analytics.sessionDurations?.averageSessionDurationMs
+        ? `${Math.round(analytics.sessionDurations.averageSessionDurationMs / 1000)}s`
+        : '0s',
+    },
+  ];
+
+  const formatLastRefreshed = lastRefreshed
+    ? lastRefreshed.toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })
+    : 'Not synced yet';
+
   return (
     <div className="admin-page">
-      <div className="section-shell section-block">
-        <div className="section-heading">
-          <span className="eyebrow">Admin</span>
-          <h2>Manage resume files, portfolio projects, and incoming messages from one dashboard.</h2>
-          <p>This page now uses the same structured API as the public portfolio.</p>
+      <div className="dashboard-hero section-shell">
+        <div className="dashboard-hero__copy">
+          <span className="eyebrow">Admin Control Center</span>
+          <h1>Advanced portfolio dashboard</h1>
+          <p>
+            Manage resumes, projects, messages, and visitor analytics from a polished command center designed for
+            quick scanning and fast edits.
+          </p>
+          <div className="dashboard-hero__actions">
+            <button type="button" className="primary-button" onClick={refreshDashboard}>
+              Refresh Dashboard
+            </button>
+            <span className="dashboard-hero__meta">Last synced: {formatLastRefreshed}</span>
+          </div>
         </div>
 
-        {errorMsg && <div className="empty-state">{errorMsg}</div>}
-
-        <div className="admin-summary-grid">
+        <div className="dashboard-hero__stats">
           {summaryCards.map((card) => (
-            <div key={card.label} className="admin-stat-card">
+            <div key={card.label} className="dashboard-hero__stat">
               <span>{card.label}</span>
               <strong>{card.value}</strong>
             </div>
           ))}
         </div>
+      </div>
 
-        <div className="admin-grid">
-          <section className="admin-card">
+      <div className="section-shell">
+        {isLoading && <div className="empty-state">Loading dashboard data...</div>}
+        {errorMsg && <div className="empty-state">{errorMsg}</div>}
+        {successMsg && <div className="success-state">{successMsg}</div>}
+      </div>
+
+      <div className="dashboard-layout section-shell">
+        <main className="dashboard-main">
+          <section className="admin-card admin-card--accent">
             <h3>Resume Upload</h3>
             <p>Upload a PDF so the hero section can serve the latest resume download.</p>
             <input type="file" accept="application/pdf" onChange={(event) => setSelectedFile(event.target.files[0])} />
+            {selectedFile && <div className="file-selection-chip">{selectedFile.name}</div>}
             <button type="button" className="primary-button" onClick={handleResumeUpload} disabled={isUploadingResume}>
               {isUploadingResume ? 'Uploading...' : 'Upload Resume'}
             </button>
@@ -233,106 +314,265 @@ const Admin = () => {
               <button type="submit" className="primary-button">Create Project</button>
             </form>
           </section>
-        </div>
 
-        <section className="admin-card">
-          <h3>Resume Files</h3>
-          <div className="admin-table-wrap">
-            <table className="admin-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Path</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filesList.length > 0 ? (
-                  filesList.map(({ _id, file_mimetype, filename, filePath }) => (
-                    <tr key={_id}>
-                      <td>{filename}</td>
-                      <td>{filePath}</td>
-                      <td>
-                        <button type="button" onClick={() => downloadFile(_id, filePath, file_mimetype)}>Download</button>
-                        <button type="button" onClick={() => handleDeleteResume(_id)}>Delete</button>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
+          <section className="admin-card">
+            <div className="section-heading section-heading--compact">
+              <span className="eyebrow">Resume Vault</span>
+              <h3>Stored files</h3>
+            </div>
+            <div className="admin-table-wrap">
+              <table className="admin-table">
+                <thead>
                   <tr>
-                    <td colSpan={3}>No resume files found.</td>
+                    <th>Name</th>
+                    <th>Path</th>
+                    <th>Actions</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </section>
+                </thead>
+                <tbody>
+                  {filesList.length > 0 ? (
+                    filesList.map(({ _id, file_mimetype, filename, filePath }) => (
+                      <tr key={_id}>
+                        <td>{filename}</td>
+                        <td>{filePath}</td>
+                        <td>
+                          <div className="table-action-group">
+                            <button type="button" onClick={() => downloadFile(_id, filePath, file_mimetype)}>Download</button>
+                            <button type="button" onClick={() => handleDeleteResume(_id)}>Delete</button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={3}>No resume files found.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </section>
 
-        <section className="admin-card">
-          <h3>Projects</h3>
-          <div className="admin-table-wrap">
-            <table className="admin-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Category</th>
-                  <th>Date</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {projects.length > 0 ? (
-                  projects.map((project) => (
-                    <tr key={project._id}>
-                      <td>{project.name}</td>
-                      <td>{project.futureField}</td>
-                      <td>{new Date(project.date).toLocaleDateString()}</td>
-                      <td>
-                        <button type="button" onClick={() => handleDeleteProject(project._id)}>Delete</button>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
+          <section className="admin-card">
+            <div className="section-heading section-heading--compact">
+              <span className="eyebrow">Projects</span>
+              <h3>Portfolio projects</h3>
+            </div>
+            <div className="admin-table-wrap">
+              <table className="admin-table">
+                <thead>
                   <tr>
-                    <td colSpan={4}>No projects found.</td>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Actions</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </section>
+                </thead>
+                <tbody>
+                  {projects.length > 0 ? (
+                    projects.map((project) => (
+                      <tr key={project._id}>
+                        <td>{project.name}</td>
+                        <td>{project.futureField}</td>
+                        <td>{new Date(project.date).toLocaleDateString()}</td>
+                        <td>
+                          <div className="table-action-group">
+                            <button type="button" onClick={() => handleDeleteProject(project._id)}>Delete</button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={4}>No projects found.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </section>
 
-        <section className="admin-card">
-          <h3>Client Messages</h3>
-          <div className="admin-table-wrap">
-            <table className="admin-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Subject</th>
-                  <th>Email</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {messages.length > 0 ? (
-                  messages.map((message) => (
-                    <tr key={message._id}>
-                      <td>{message.name}</td>
-                      <td>{message.subject}</td>
-                      <td>{message.clientEmail}</td>
-                      <td>{new Date(message.date).toLocaleDateString()}</td>
-                    </tr>
-                  ))
-                ) : (
+          <section className="admin-card">
+            <div className="section-heading section-heading--compact">
+              <span className="eyebrow">Inbox</span>
+              <h3>Client messages</h3>
+            </div>
+            <div className="admin-table-wrap">
+              <table className="admin-table">
+                <thead>
                   <tr>
-                    <td colSpan={4}>No messages yet.</td>
+                    <th>Name</th>
+                    <th>Subject</th>
+                    <th>Email</th>
+                    <th>Date</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </section>
+                </thead>
+                <tbody>
+                  {messages.length > 0 ? (
+                    messages.map((message) => (
+                      <tr key={message._id}>
+                        <td>{message.name}</td>
+                        <td>{message.subject}</td>
+                        <td>{message.clientEmail}</td>
+                        <td>{new Date(message.date).toLocaleDateString()}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={4}>No messages yet.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section className="admin-card">
+            <div className="section-heading section-heading--compact">
+              <span className="eyebrow">Activity</span>
+              <h3>Recent events</h3>
+            </div>
+            <div className="admin-table-wrap">
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>Time</th>
+                    <th>Type</th>
+                    <th>Path</th>
+                    <th>Country</th>
+                    <th>Device</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {analytics.recentEvents.length > 0 ? analytics.recentEvents.map((event) => (
+                    <tr key={event._id}>
+                      <td>{new Date(event.createdAt).toLocaleString()}</td>
+                      <td>{event.eventType}</td>
+                      <td>{event.path}</td>
+                      <td>{event.country || 'Unknown'}</td>
+                      <td>{event.deviceType || 'Unknown'}</td>
+                    </tr>
+                  )) : (
+                    <tr><td colSpan={5}>No events recorded yet.</td></tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </main>
+
+        <aside className="dashboard-rail">
+          <section className="admin-card admin-card--sticky">
+            <h3>Traffic Analytics</h3>
+            <p>Visitor sessions, page views, clicks, source, device, and approximate location.</p>
+            <div className="admin-summary-grid admin-summary-grid--compact">
+              {trafficCards.map((card) => (
+                <div key={card.label} className="admin-stat-card">
+                  <span>{card.label}</span>
+                  <strong>{card.value}</strong>
+                </div>
+              ))}
+            </div>
+
+            <div className="dashboard-stack">
+              <div className="mini-panel">
+                <h4>Top Pages</h4>
+                <table className="admin-table">
+                  <tbody>
+                    {analytics.topPages.length > 0 ? analytics.topPages.map((item) => (
+                      <tr key={item.label}>
+                        <td>{item.label}</td>
+                        <td>{item.count}</td>
+                      </tr>
+                    )) : (
+                      <tr><td colSpan={2}>No page data yet.</td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mini-panel">
+                <h4>Traffic Sources</h4>
+                <table className="admin-table">
+                  <tbody>
+                    {analytics.topSources.length > 0 ? analytics.topSources.map((item) => (
+                      <tr key={item.label}>
+                        <td>{item.label || 'Direct'}</td>
+                        <td>{item.count}</td>
+                      </tr>
+                    )) : (
+                      <tr><td colSpan={2}>No source data yet.</td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mini-panel">
+                <h4>Top Clicks</h4>
+                <table className="admin-table">
+                  <tbody>
+                    {analytics.topClicks.length > 0 ? analytics.topClicks.map((item) => (
+                      <tr key={item.label}>
+                        <td>{item.label}</td>
+                        <td>{item.count}</td>
+                      </tr>
+                    )) : (
+                      <tr><td colSpan={2}>No click data yet.</td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mini-panel">
+                <h4>Location</h4>
+                <table className="admin-table">
+                  <tbody>
+                    {analytics.topCountries.length > 0 ? analytics.topCountries.map((item) => (
+                      <tr key={item.label}>
+                        <td>{item.label}</td>
+                        <td>{item.count}</td>
+                      </tr>
+                    )) : (
+                      <tr><td colSpan={2}>No location data yet.</td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mini-panel">
+                <h4>Devices</h4>
+                <table className="admin-table">
+                  <tbody>
+                    {analytics.topDevices.length > 0 ? analytics.topDevices.map((item) => (
+                      <tr key={item.label}>
+                        <td>{item.label}</td>
+                        <td>{item.count}</td>
+                      </tr>
+                    )) : (
+                      <tr><td colSpan={2}>No device data yet.</td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mini-panel">
+                <h4>Top Browsers</h4>
+                <table className="admin-table">
+                  <tbody>
+                    {analytics.topBrowsers.length > 0 ? analytics.topBrowsers.map((item) => (
+                      <tr key={item.label}>
+                        <td>{item.label}</td>
+                        <td>{item.count}</td>
+                      </tr>
+                    )) : (
+                      <tr><td colSpan={2}>No browser data yet.</td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </aside>
       </div>
     </div>
   );

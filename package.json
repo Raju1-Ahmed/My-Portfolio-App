@@ -17,6 +17,7 @@
     "downloadjs": "^1.4.7",
     "font-awesome": "^4.7.0",
     "moment": "^2.29.4",
+    "playwright": "^1.61.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-icons": "^4.8.0",

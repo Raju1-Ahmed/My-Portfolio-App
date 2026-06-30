@@ -3,8 +3,7 @@ import { faFacebook, faGithub, faInstagram, faLinkedin, faTwitter, faWhatsapp } 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
-import { API_ENDPOINTS } from '../../Pages/utils/constants';
+import { apiRequest } from '../../Pages/utils/api';
 import './email.css';
 
 function EmailSend() {
@@ -25,7 +24,7 @@ function EmailSend() {
       clientEmail: email,
     };
 
-    axios.post(API_ENDPOINTS.messages, formData)
+    apiRequest({ url: '/messages', method: 'POST', data: formData })
       .then(() => {
         setLoading(false);
         setName('');
